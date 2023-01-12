@@ -1,4 +1,6 @@
 import sys
+from utils.Settings import BASE_DIR, ConfigHandler
+
 
 LogConfig = dict(  # no cov
     version=1,
@@ -7,13 +9,13 @@ LogConfig = dict(  # no cov
         "sanic.root": {"level": "INFO", "handlers": ["console"]},
         "sanic.error": {
             "level": "INFO",
-            "handlers": ["error_file"],
+            "handlers": ["error_file", "error_console"],
             "propagate": True,
             "qualname": "sanic.error",
         },
         "sanic.access": {
             "level": "INFO",
-            "handlers": ["access_file"],
+            "handlers": ["access_file", "access_console"],
             "propagate": True,
             "qualname": "sanic.access",
         },
@@ -30,20 +32,30 @@ LogConfig = dict(  # no cov
             "formatter": "generic",
             "stream": sys.stdout,
         },
+        "error_console": {
+            "class": "logging.StreamHandler",
+            "formatter": "generic",
+            "stream": sys.stderr,
+        },
+        "access_console": {
+            "class": "logging.StreamHandler",
+            "formatter": "access",
+            "stream": sys.stdout,
+        },
         "error_file": {
             "class": "logging.handlers.TimedRotatingFileHandler",
             "formatter": "generic",
-            "filename": 'error.log',
-            "when": "midnight",
-            "backupCount": 30,
+            "filename": str(BASE_DIR) + ConfigHandler().get_config('LogSetting', 'log_dir') + "/error.log",
+            "when": ConfigHandler().get_config('LogSetting', 'rotate_time'),
+            "backupCount": int(ConfigHandler().get_config('LogSetting', 'backup_count')),
             "encoding": "utf-8"
         },
         "access_file": {
             "class": "logging.handlers.TimedRotatingFileHandler",
             "formatter": "access",
-            "filename": 'access.log',
-            "when": "midnight",
-            "backupCount": 30,
+            "filename": str(BASE_DIR) + ConfigHandler().get_config('LogSetting', 'log_dir') + '/access.log',
+            "when": ConfigHandler().get_config('LogSetting', 'rotate_time'),
+            "backupCount": int(ConfigHandler().get_config('LogSetting', 'backup_count')),
             "encoding": "utf-8"
         },
     },

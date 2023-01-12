@@ -5,16 +5,18 @@ from typing import Callable, Type, TypeVar, Generic, Dict, Optional, Union
 from sanic.views import HTTPMethodView
 from sanic.response import json as sanic_json
 
-from pydantic import BaseModel, ValidationError
-from pydantic.generics import GenericModel
-
 from sanic_ext.exceptions import InitError
 from sanic_ext.extensions.openapi.builders import OperationStore
 from sanic_ext.utils.extraction import extract_request
 
-from .Exceptions import _321CQUException
+from pydantic import BaseModel, ValidationError
+from pydantic.generics import GenericModel
 
-__all__ = ['ApiInterface', 'api_request', 'ApiResponse', 'api_response']
+from grpc.aio import AioRpcError
+
+from utils.Exceptions import _321CQUException
+
+__all__ = ['ApiInterface', 'api_request', 'ApiResponse', 'api_response', 'handle_grpc_error']
 
 T = TypeVar("T")
 
@@ -30,14 +32,13 @@ class ApiResponse(BaseModel):
 
 
 def api_request(
-    json: Type[BaseModel] | None = None,
-    form: Type[BaseModel] | None = None,
-    query: Type[BaseModel] | None = None,
-    body_argument: str = "body",
-    query_argument: str = "query",
-    **kwargs
+        json: Type[BaseModel] | None = None,
+        form: Type[BaseModel] | None = None,
+        query: Type[BaseModel] | None = None,
+        body_argument: str = "body",
+        query_argument: str = "query",
+        **kwargs
 ) -> Callable[[T], T]:
-
     schemas: Dict[str, BaseModel] = {
         key: param
         for key, param in (
@@ -66,7 +67,7 @@ def api_request(
                 if query:
                     kwargs[query_argument] = query.parse_obj(request.args)
             except ValidationError as e:
-                raise _321CQUException(message=f"请求参数错误，报错信息：{e.json()}")
+                raise _321CQUException(error_info=f"请求参数错误，报错信息：{e.json()}", quiet=True)
             retval = f(*args, **kwargs)
             if inspect.isawaitable(retval):
                 retval = await retval
@@ -91,7 +92,7 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict]] = None, status
                 ret = await ret
 
             kwargs["status"] = status
-            return sanic_json(BaseApiResponse(status=1, msg='success', data=ret).dict())
+            return sanic_json(BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).dict())
 
         if f in OperationStore():
             OperationStore()[decorated_function] = OperationStore().pop(f)
@@ -109,3 +110,16 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict]] = None, status
 
 class ApiInterface(HTTPMethodView):
     pass
+
+
+def handle_grpc_error(func):
+    @wraps(func)
+    async def wrapped_function(*args, **kwargs):
+        try:
+            ret = func(*args, **kwargs)
+            if inspect.isawaitable(ret):
+                ret = await ret
+            return ret
+        except AioRpcError as e:
+            raise _321CQUException(error_info="服务调用异常", extra=e.details(), status_code=503)
+    return wrapped_function
