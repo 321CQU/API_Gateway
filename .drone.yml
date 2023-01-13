@@ -1,0 +1,40 @@
+kind: pipeline
+type: ssh
+name: 部署API网关
+
+server:
+  host:
+    from_secret: ssh_host
+  user: root
+  ssh_key:
+    from_secret: ssh_key
+
+platform:
+  os: linux
+  arсh: amd64
+
+clone:
+  disable: true
+
+steps:
+- name: clone
+  commands:
+    - git config --global http.proxy http://127.0.0.1:7890
+    - git config --global https.proxy http://127.0.0.1:7890
+    - git clone https://github.com/ZhuLegend/321CQU_APIGateway.git
+    - cd ./321CQU_APIGateway/
+    - git checkout main
+
+- name: 新建镜像
+  commands:
+    - cd ./321CQU_APIGateway/
+    - docker-compose up -d --force-recreate
+  depends_on:
+    - clone
+
+trigger:
+  branch:
+  - main
+  event:
+  - push
+  - merge

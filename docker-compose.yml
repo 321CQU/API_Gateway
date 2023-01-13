@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  api-gateway:
+    build: .
+    ports:
+     - "8000:8000"
+    restart: always
+    volumes:
+      - /www/wwwroot/www.321cqu.com/api_gateway/logs:/src/logs
+      - /www/wwwroot/www.321cqu.com/api_gateway/config.cfg:/src/utils/config.cfg
