@@ -28,7 +28,6 @@ steps:
 - name: 新建镜像
   commands:
     - cd ./321CQU_APIGateway/
-    - docker-compose build
     - docker-compose up -d
   depends_on:
     - clone
@@ -39,3 +38,32 @@ trigger:
   event:
   - push
   - merge
+
+---
+kind: pipeline
+type: docker
+name: 通知
+
+clone:
+  disable: true
+
+steps:
+  - name: 钉钉通知
+    image: lddsb/drone-dingtalk-message
+    settings:
+      token:
+        from_secret: dingtalk_token
+      secret:
+        from_secret: dingtalk_sign
+      type: markdown
+      message_color: true
+      message_pic: true
+      sha_link: true
+    when:
+      status:
+        - success
+        - failure
+
+depends_on:
+  - 部署API网关
+
