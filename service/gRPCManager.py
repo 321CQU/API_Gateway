@@ -7,8 +7,9 @@ from utils.Settings import ConfigHandler
 from utils.Singleton import singleton
 
 from service.notification_center.proto import apns_pb2_grpc
+from service.notification_center.mock.MockApnStub import MockApnStub
 
-__all__ = ['gRPCManager', 'ServiceEnum']
+__all__ = ['gRPCManager', 'ServiceEnum', 'MockGRPCManager']
 
 
 class ServiceEnum(StrEnum):
@@ -17,6 +18,10 @@ class ServiceEnum(StrEnum):
     def get_stub_class(self):
         if self == ServiceEnum.NotificationCenter:
             return apns_pb2_grpc.ApnsStub
+
+    def get_mock_stub_class(self):
+        if self == ServiceEnum.NotificationCenter:
+            return MockApnStub
 
 
 @singleton
@@ -42,6 +47,13 @@ class gRPCManager:
             target_url = "localhost:" + port
             async with insecure_channel(target_url) as channel:
                 yield target(channel)
+
+
+@singleton
+class MockGRPCManager:
+    @asynccontextmanager
+    async def get_stub(self, service: ServiceEnum):
+        return service.get_mock_stub_class()
 
 
 if __name__ == '__main__':

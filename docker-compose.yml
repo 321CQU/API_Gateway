@@ -7,6 +7,6 @@ services:
      - "8000:8000"
     restart: always
     volumes:
-      - /www/wwwroot/www.321cqu.com/api_gateway/site-package:/usr/local/lib/python3.11/site-packages
+      - /www/wwwroot/www.321cqu.com/api_gateway/custom-sit-package:/src/custom-site-package
       - /www/wwwroot/www.321cqu.com/api_gateway/logs:/src/logs
       - /www/wwwroot/www.321cqu.com/api_gateway/config.cfg:/src/utils/config.cfg
