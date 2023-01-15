@@ -25,7 +25,6 @@ class _321CQUException(SanicException):
 class _321CQUErrorHandler(ErrorHandler):
     def default(self, request, exception: SanicException):
         if isinstance(exception, _321CQUException):
-            print(exception.args)
             return json({'status': 0, 'msg': exception.error_info, 'data': exception.context},
                         status=exception.status_code)
         else:

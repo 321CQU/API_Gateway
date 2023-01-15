@@ -3,13 +3,13 @@ from functools import wraps
 from typing import Callable, Type, TypeVar, Generic, Dict, Optional, Union
 
 from sanic.views import HTTPMethodView
-from sanic.response import json as sanic_json
+from sanic.response import json as sanic_json, HTTPResponse
 
 from sanic_ext.exceptions import InitError
 from sanic_ext.extensions.openapi.builders import OperationStore
 from sanic_ext.utils.extraction import extract_request
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, Field
 from pydantic.generics import GenericModel
 
 from grpc.aio import AioRpcError
@@ -25,8 +25,8 @@ class BaseApiResponse(GenericModel, Generic[T]):
     """
     API响应模版，回传的ApiResponse子类会填入data中
     """
-    status: int
-    msg: str
+    status: int = Field(title='响应状态', description='成功时为1，失败时为0')
+    msg: str = Field(title='响应信息', description='成功时为`success`，失败时为相关错误提示')
     data: T | None
 
 
@@ -100,13 +100,14 @@ def api_request(
     return decorator
 
 
-def api_response(retval: Optional[Union[Type[ApiResponse], Dict]] = None, status: int = 200, description: str = '',
-                 **kwargs):
+def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] = None, status: int = 200, description: str = '',
+                 *, auto_wrap: bool = True, **kwargs):
     """
     实现参数返回值自动包装与API页面生成的装饰器
     :param retval: 返回值信息，可以为ApiResponse的子类或字典，为空则返回值中data项置None
     :param status: Response Http相应码
     :param description: 返回值相关描述，显示在/docs页面中
+    :param auto_wrap: 强制关键字参数，为False时直接返回被装饰函数运行结果
     :param kwargs: 其他需要显示在/docs中的参数（需满足OpenAPI规范）
     """
     def decorator(f):
@@ -117,18 +118,25 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict]] = None, status
                 ret = await ret
 
             kwargs["status"] = status
-            return sanic_json(BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).dict())
+            if auto_wrap:
+                return sanic_json(BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).dict())
+            else:
+                return ret
 
         # 使用sanic-ext中的OperationStore实现文档自动生成，参考其中的openapi.body装饰器
         if f in OperationStore():
             OperationStore()[decorated_function] = OperationStore().pop(f)
 
-        if inspect.isclass(retval) and issubclass(retval, ApiResponse):
-            OperationStore()[decorated_function].response(status, {'application/json': BaseApiResponse[retval]},
-                                                          description, **kwargs)
+        if auto_wrap:
+            if inspect.isclass(retval) and issubclass(retval, ApiResponse):
+                OperationStore()[decorated_function].response(status, {'application/json': BaseApiResponse[retval]},
+                                                              description, **kwargs)
+            else:
+                base_retval = {'status': 1, 'msg': 'success', 'data': retval if retval is not None else {}}
+                OperationStore()[decorated_function].response(status, {'application/json': BaseApiResponse[type(None)]},
+                                                              description, **kwargs)
         else:
-            base_retval = {'status': 1, 'msg': 'success', 'data': retval if retval is not None else {}}
-            OperationStore()[decorated_function].response(status, base_retval, description, **kwargs)
+            OperationStore()[decorated_function].response(status, retval, description, **kwargs)
         return decorated_function
 
     return decorator
