@@ -161,5 +161,5 @@ def handle_grpc_error(func):
                 ret = await ret
             return ret
         except AioRpcError as e:
-            raise _321CQUException(error_info="服务调用异常", extra=e.details(), status_code=503)
+            raise _321CQUException(error_info="服务调用异常", extra=e.details(), status_code=503, quite=False)
     return wrapped_function

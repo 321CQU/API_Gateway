@@ -44,7 +44,7 @@ class gRPCManager:
 
         if target is not None:
             port = self._service_ports[service.value + "_service_port"]
-            target_url = "localhost:" + port
+            target_url = "172.18.0.1:" + port
             async with insecure_channel(target_url) as channel:
                 yield target(channel)
 

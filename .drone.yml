@@ -28,6 +28,7 @@ steps:
 - name: 新建镜像
   commands:
     - cd ./321CQU_APIGateway/
+    - docker-compose build
     - docker-compose up -d
   depends_on:
     - clone
@@ -59,11 +60,6 @@ steps:
       message_color: true
       message_pic: true
       sha_link: true
-    when:
-      status:
-        - success
-        - failure
 
 depends_on:
   - 部署API网关
-

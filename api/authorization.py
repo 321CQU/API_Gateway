@@ -99,6 +99,9 @@ class _RefreshTokenResponse(ApiResponse):
 
 
 def _decode_token(token: str) -> dict:
+    if token is None:
+        raise _321CQUException(error_info='Unauthorized', status_code=401)
+
     try:
         res = jwt.decode(token, ConfigHandler().get_config('ApiKey', 'jwt_secret'))
     except jwt.JWTError as e:
