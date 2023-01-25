@@ -30,8 +30,15 @@ class gRPCManager:
         handler = ConfigHandler()
         all_options = handler.get_options('ServiceSetting')
 
+        service_hosts = list(filter(lambda x: x.endswith('_service_host'), all_options))
         service_ports = list(filter(lambda x: x.endswith('_service_port'), all_options))
+        self._service_host = {}
         self._service_ports = {}
+
+        for host in service_hosts:
+            self._service_host.update({
+                host: handler.get_config("ServiceSetting", host)
+            })
 
         for port in service_ports:
             self._service_ports.update({
@@ -43,8 +50,9 @@ class gRPCManager:
         target = service.get_stub_class()
 
         if target is not None:
+            host = self._service_host[service.value + "_service_host"]
             port = self._service_ports[service.value + "_service_port"]
-            target_url = "172.18.0.1:" + port
+            target_url = host + ":" + port
             async with insecure_channel(target_url) as channel:
                 yield target(channel)
 

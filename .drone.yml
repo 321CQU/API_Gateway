@@ -30,6 +30,7 @@ steps:
     - cd ./321CQU_APIGateway/
     - docker-compose build
     - docker-compose up -d
+    - docker image prune -f
   depends_on:
     - clone
 
