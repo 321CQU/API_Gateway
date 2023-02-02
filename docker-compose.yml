@@ -10,6 +10,9 @@ services:
     volumes:
       - /www/services/api_gateway/logs:/src/logs
       - /www/services/api_gateway/config.cfg:/src/utils/config.cfg
+      - /www/services/_321CQU_package/python_package:/_321CQU_package
+    environment:
+      PYTHONPATH: /_321CQU_package
     networks:
       - persist
 

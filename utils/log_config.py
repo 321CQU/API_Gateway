@@ -1,5 +1,5 @@
 import sys
-from utils.Settings import BASE_DIR, ConfigHandler
+from utils.Settings import BASE_DIR, ConfigManager
 
 
 LogConfig = dict(  # no cov
@@ -45,17 +45,17 @@ LogConfig = dict(  # no cov
         "error_file": {
             "class": "logging.handlers.TimedRotatingFileHandler",
             "formatter": "generic",
-            "filename": str(BASE_DIR) + ConfigHandler().get_config('LogSetting', 'log_dir') + "/error.log",
-            "when": ConfigHandler().get_config('LogSetting', 'rotate_time'),
-            "backupCount": int(ConfigHandler().get_config('LogSetting', 'backup_count')),
+            "filename": str(BASE_DIR) + ConfigManager().get_config('LogSetting', 'log_dir') + "/error.log",
+            "when": ConfigManager().get_config('LogSetting', 'rotate_time'),
+            "backupCount": int(ConfigManager().get_config('LogSetting', 'backup_count')),
             "encoding": "utf-8"
         },
         "access_file": {
             "class": "logging.handlers.TimedRotatingFileHandler",
             "formatter": "access",
-            "filename": str(BASE_DIR) + ConfigHandler().get_config('LogSetting', 'log_dir') + '/access.log',
-            "when": ConfigHandler().get_config('LogSetting', 'rotate_time'),
-            "backupCount": int(ConfigHandler().get_config('LogSetting', 'backup_count')),
+            "filename": str(BASE_DIR) + ConfigManager().get_config('LogSetting', 'log_dir') + '/access.log',
+            "when": ConfigManager().get_config('LogSetting', 'rotate_time'),
+            "backupCount": int(ConfigManager().get_config('LogSetting', 'backup_count')),
             "encoding": "utf-8"
         },
     },

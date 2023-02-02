@@ -12,7 +12,7 @@ from sanic_ext.exceptions import InitError
 from api.utils.ApiInterface import api_request, api_response, ApiResponse
 
 from utils.Exceptions import _321CQUException
-from utils.Settings import ConfigHandler
+from utils.Settings import ConfigManager
 
 __all__ = ['authorization_blueprint', 'authorized', 'LoginApplyType', 'TokenPayload', 'AuthorizedUser']
 
@@ -28,7 +28,7 @@ class LoginApplyType(StrEnum):
     Announcement_Website = 'Announcement_Website'
 
     def check_api_key(self, api_key: str) -> bool:
-        return api_key == ConfigHandler().get_config('ApiKey', self.value())
+        return api_key == ConfigManager().get_config('ApiKey', self.value())
 
 
 class TokenPayload(BaseModel):
@@ -71,13 +71,13 @@ async def login(request: Request, body: _LoginRequest):
 
     小程序与APP调用时应将将统一身份认证账号密码作为参数上传以支持需要统一身份认证的相关API调用
     """
-    if body.apiKey != ConfigHandler().get_config('ApiKey', body.applyType):
+    if body.apiKey != ConfigManager().get_config('ApiKey', body.applyType):
         raise _321CQUException(error_info='Unauthorized', status_code=401)
 
     now = datetime.now()
     token_expire_time = int((now + timedelta(minutes=15)).timestamp())
     refresh_token_expire_time = int((now + timedelta(weeks=1)).timestamp())
-    secret = ConfigHandler().get_config('ApiKey', 'jwt_secret')
+    secret = ConfigManager().get_config('ApiKey', 'jwt_secret')
     token = jwt.encode(TokenPayload(timestamp=token_expire_time, applyType=body.applyType,
                                     username=body.username, password=body.password).dict(), secret)
     refresh_token = jwt.encode(TokenPayload(timestamp=refresh_token_expire_time,
@@ -103,7 +103,7 @@ def _decode_token(token: str) -> dict:
         raise _321CQUException(error_info='Unauthorized', status_code=401)
 
     try:
-        res = jwt.decode(token, ConfigHandler().get_config('ApiKey', 'jwt_secret'))
+        res = jwt.decode(token, ConfigManager().get_config('ApiKey', 'jwt_secret'))
     except jwt.JWTError as e:
         raise _321CQUException(error_info='Unauthorized', status_code=401, extra={'error': e})
 
@@ -130,7 +130,7 @@ async def refresh_token(request: Request, body: _RefreshTokenRequest):
     token_expire_time = int((datetime.now() + timedelta(minutes=15)).timestamp())
     token = jwt.encode(TokenPayload(timestamp=token_expire_time, applyType=payload.applyType,
                                     username=payload.username, password=payload.password).dict(),
-                       ConfigHandler().get_config('ApiKey', 'jwt_secret'))
+                       ConfigManager().get_config('ApiKey', 'jwt_secret'))
     return _RefreshTokenResponse(token=token, tokenExpireTime=token_expire_time)
 
 

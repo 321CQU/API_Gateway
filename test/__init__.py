@@ -23,5 +23,5 @@ def app() -> Sanic:
 
 
 @pytest.fixture(scope='package')
-def test_client(app) -> SanicASGITestClient:
+def test_client(app: Sanic) -> SanicASGITestClient:
     return SanicASGITestClient(app)

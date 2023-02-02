@@ -1,12 +1,13 @@
 from contextlib import asynccontextmanager
 from enum import StrEnum
 
-from grpc.aio import insecure_channel, Channel
+from grpc.aio import insecure_channel
 
-from utils.Settings import ConfigHandler
-from utils.Singleton import singleton
+from utils.Settings import ConfigManager
 
-from service.notification_center.proto import apns_pb2_grpc
+from _321CQU.tools import singleton
+from micro_services_protobuf.notification_center import apns_pb2_grpc
+
 from service.notification_center.mock.MockApnStub import MockApnStub
 
 __all__ = ['gRPCManager', 'ServiceEnum', 'MockGRPCManager']
@@ -27,7 +28,7 @@ class ServiceEnum(StrEnum):
 @singleton
 class gRPCManager:
     def __init__(self):
-        handler = ConfigHandler()
+        handler = ConfigManager()
         all_options = handler.get_options('ServiceSetting')
 
         service_hosts = list(filter(lambda x: x.endswith('_service_host'), all_options))
@@ -61,13 +62,13 @@ class gRPCManager:
 class MockGRPCManager:
     @asynccontextmanager
     async def get_stub(self, service: ServiceEnum):
-        return service.get_mock_stub_class()
+        yield service.get_mock_stub_class()()
 
 
 if __name__ == '__main__':
     import logging
     import asyncio
-    from service.notification_center.proto import apns_pb2
+    from micro_services_protobuf.notification_center import apns_pb2
     from api.utils.ApiInterface import handle_grpc_error
 
 

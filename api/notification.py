@@ -2,8 +2,10 @@ from pydantic import BaseModel, Field
 
 from sanic import Request, Blueprint
 
-from service.notification_center.proto.apns_pb2 import SetUserApnsRequest, DefaultResponse
-from service.notification_center.proto.apns_pb2_grpc import ApnsStub
+from micro_services_protobuf.notification_center.apns_pb2 import SetUserApnsRequest
+from micro_services_protobuf.common_pb2 import DefaultResponse
+from micro_services_protobuf.notification_center.apns_pb2_grpc import ApnsStub
+
 from service.gRPCManager import gRPCManager, ServiceEnum
 
 from api.authorization import authorized, LoginApplyType

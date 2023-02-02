@@ -1,40 +1,19 @@
-from abc import ABC, abstractmethod
 from typing import Iterable, Any
 from contextlib import asynccontextmanager
 
 import aiosqlite
 
+from _321CQU.sql_helper import SqlManager
+
 from utils.Exceptions import _321CQUException
-from utils.AbstractSql import AbstractConnection, AbstractAioCursor
-from utils.Settings import ConfigHandler, BASE_DIR
+from utils.Settings import ConfigManager, BASE_DIR
 
 __all__ = ['SqlManager', 'SqliteManager']
 
 
-class SqlManager(ABC):
-    """
-    基于该类实现数据库调用依赖注入，同时支持单元测试时注入mock数据库
-    实现该类请支持execute自动提交
-    """
-
-    @abstractmethod
-    async def connect(self) -> AbstractConnection:
-        pass
-
-    @abstractmethod
-    async def execute(self, sql: str, parameters: Iterable[Any] = None) -> AbstractAioCursor:
-        pass
-
-    @abstractmethod
-    async def executemany(
-            self, sql: str, parameters: Iterable[Iterable[Any]]
-    ) -> AbstractAioCursor:
-        pass
-
-
 class SqliteManager(SqlManager):
     def __init__(self):
-        self.connect_args = (str(BASE_DIR) + ConfigHandler().get_config('DatabaseSetting', 'dev_path'),)
+        self.connect_args = (str(BASE_DIR) + ConfigManager().get_config('DatabaseSetting', 'dev_path'),)
 
     @asynccontextmanager
     async def connect(self, ignore_error: bool = True) -> aiosqlite.Connection:

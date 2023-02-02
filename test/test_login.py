@@ -6,12 +6,12 @@ from jose import jwt
 
 from api import authorized, LoginApplyType, AuthorizedUser, TokenPayload
 from api.authorization import _LoginResponse, _RefreshTokenResponse, _decode_token
-from utils.Settings import ConfigHandler
+from utils.Settings import ConfigManager
 
 from test import test_client, app
 
 _login_params = {
-    'apiKey': ConfigHandler().get_config('ApiKey', 'WX_Mini_APP'), 'applyType': 'WX_Mini_APP',
+    'apiKey': ConfigManager().get_config('ApiKey', 'WX_Mini_APP'), 'applyType': 'WX_Mini_APP',
     'username': "test2", "password": "123"
 }
 
@@ -20,7 +20,7 @@ _login_params = {
 async def test_authorize(test_client: SanicASGITestClient):
     request1, response1 = await test_client.post(
         "/v1/authorization/login",
-        json={'apiKey': ConfigHandler().get_config('ApiKey', 'IOS_APP'), 'applyType': 'WX_Mini_APP',
+        json={'apiKey': ConfigManager().get_config('ApiKey', 'IOS_APP'), 'applyType': 'WX_Mini_APP',
               'username': "test2", "password": "123"}
     )
     assert response1.status == 401
