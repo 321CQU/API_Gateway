@@ -3,8 +3,9 @@ from sanic_testing.testing import SanicASGITestClient
 
 from sanic import Sanic
 
+from _321CQU.tools.gRPCManager import gRPCManager, MockGRPCManager
+
 from api import api_urls
-from service.gRPCManager import gRPCManager, MockGRPCManager
 from utils.Exceptions import _321CQUErrorHandler
 from utils.SqlManager import SqlManager, SqliteManager
 from utils.log_config import LogConfig

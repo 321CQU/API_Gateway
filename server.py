@@ -1,6 +1,8 @@
+from functools import partial
+
 from sanic import Sanic
 
-from service.gRPCManager import gRPCManager
+from _321CQU.tools.gRPCManager import gRPCManager
 from utils.Exceptions import _321CQUErrorHandler
 from utils.log_config import LogConfig
 from utils.SqlManager import SqlManager, SqliteManager
@@ -10,7 +12,7 @@ app = Sanic('API_Gateway', log_config=LogConfig)
 app.error_handler = _321CQUErrorHandler()
 
 app.ext.add_dependency(SqlManager, SqliteManager)
-app.ext.add_dependency(gRPCManager)
+app.ext.add_dependency(gRPCManager, lambda: gRPCManager())
 
 app.blueprint(api_urls)
 
