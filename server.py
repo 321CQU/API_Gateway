@@ -3,6 +3,7 @@ from functools import partial
 from sanic import Sanic
 
 from _321CQU.tools.gRPCManager import gRPCManager
+
 from utils.Exceptions import _321CQUErrorHandler
 from utils.log_config import LogConfig
 from utils.SqlManager import SqlManager, SqliteManager

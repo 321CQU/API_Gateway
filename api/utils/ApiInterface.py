@@ -3,11 +3,12 @@ from functools import wraps
 from typing import Callable, Type, TypeVar, Generic, Dict, Optional, Union
 
 from sanic.views import HTTPMethodView
-from sanic.response import json as sanic_json, HTTPResponse
+from sanic.response import HTTPResponse, JSONResponse
 
 from sanic_ext.exceptions import InitError
 from sanic_ext.extensions.openapi.builders import OperationStore
 from sanic_ext.utils.extraction import extract_request
+from sanic_ext.extensions.openapi import openapi
 
 from pydantic import BaseModel, ValidationError, Field
 from pydantic.generics import GenericModel
@@ -18,7 +19,7 @@ from utils.Exceptions import _321CQUException
 
 __all__ = ['ApiInterface', 'api_request', 'ApiResponse', 'api_response', 'handle_grpc_error']
 
-T = TypeVar("T")
+T = TypeVar("T", bound=BaseModel)
 
 
 class BaseApiResponse(GenericModel, Generic[T]):
@@ -27,7 +28,7 @@ class BaseApiResponse(GenericModel, Generic[T]):
     """
     status: int = Field(title='响应状态', description='成功时为1，失败时为0')
     msg: str = Field(title='响应信息', description='成功时为`success`，失败时为相关错误提示')
-    data: T | None
+    data: T | None = Field(title="数据")
 
 
 class ApiResponse(BaseModel):
@@ -56,22 +57,17 @@ def api_request(
     :param body_argument: 请求体中参数应当注入的名字，默认为"body"
     :param query_argument: 路由查询参数应当注入的名字，默认为"body"
     :param kwargs: 其他需要显示在/docs中的参数（需满足OpenAPI规范）
+    :param json_model_name: json 模型对应的参数
+    :param form_model_name: form 模型对应的参数
+    :param query_model_name: query 模型对应的参数
     """
-    schemas: Dict[str, BaseModel] = {
-        key: param
-        for key, param in (
-            ("json", json),
-            ("form", form),
-            ("query", query),
-        )
-    }
 
     if json and form:
         raise InitError("Cannot define both a form and json route validator")
 
     def decorator(f):
-        body_content = {"application/json": json} if json is not None else \
-            ({"application/x-www-form-urlencoded": form} if form else None)
+        body_content = {"application/json": openapi.Component(json, name=json.Config.title)} if json is not None else \
+            ({"application/x-www-form-urlencoded": openapi.Component(form, name=form.Config.title)} if form else None)
         params = {**kwargs}
 
         @wraps(f)
@@ -91,9 +87,9 @@ def api_request(
                 retval = await retval
             return retval
         # 使用sanic-ext中的OperationStore实现文档自动生成，参考其中的openapi.body装饰器
+        if f in OperationStore():
+            OperationStore()[decorated_function] = OperationStore().pop(f)
         if body_content is not None:
-            if f in OperationStore():
-                OperationStore()[decorated_function] = OperationStore().pop(f)
             OperationStore()[decorated_function].body(body_content, **params)
         return decorated_function
 
@@ -108,6 +104,7 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] 
     :param status: Response Http相应码
     :param description: 返回值相关描述，显示在/docs页面中
     :param auto_wrap: 强制关键字参数，为False时直接返回被装饰函数运行结果
+    :param model_name: 模型需要显示的名称
     :param kwargs: 其他需要显示在/docs中的参数（需满足OpenAPI规范）
     """
     def decorator(f):
@@ -119,7 +116,8 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] 
 
             kwargs["status"] = status
             if auto_wrap:
-                return sanic_json(BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).dict())
+                return HTTPResponse(BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).json(),
+                                    content_type="application/json")
             else:
                 return ret
 
@@ -129,12 +127,16 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] 
 
         if auto_wrap:
             if inspect.isclass(retval) and issubclass(retval, ApiResponse):
-                OperationStore()[decorated_function].response(status, {'application/json': BaseApiResponse[retval]},
-                                                              description, **kwargs)
+                OperationStore()[decorated_function].response(
+                    status, {
+                        'application/json': openapi.Component(BaseApiResponse[retval], name=retval.Config.title)
+                    },
+                    description, **kwargs
+                )
             else:
                 base_retval = {'status': 1, 'msg': 'success', 'data': retval if retval is not None else {}}
-                OperationStore()[decorated_function].response(status, {'application/json': BaseApiResponse[type(None)]},
-                                                              description, **kwargs)
+                OperationStore()[decorated_function].response(
+                    status, {'application/json': openapi.Component(BaseApiResponse[type(None)])}, description, **kwargs)
         else:
             OperationStore()[decorated_function].response(status, retval, description, **kwargs)
         return decorated_function

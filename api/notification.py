@@ -22,6 +22,9 @@ class _SetUserApnsRequest(BaseModel):
     sid: str = Field(title='用户学号')
     apn: str = Field(title='设备apn代码')
 
+    class Config:
+        title = "设置用户Apns请求值"
+
 
 @notification_blueprint.post(uri='setApns')
 @api_request(json=_SetUserApnsRequest)

@@ -38,6 +38,7 @@ class TokenPayload(BaseModel):
     password: Optional[str]
 
     class Config:
+        title = "token荷载"
         use_enum_values = True
 
     @classmethod
@@ -54,12 +55,18 @@ class _LoginRequest(BaseModel):
     username: Optional[str] = Field(title='用户账户')
     password: Optional[str] = Field(title='用户密码')
 
+    class Config:
+        title = "登陆请求值"
+
 
 class _LoginResponse(ApiResponse):
     token: str = Field(title='请求token', description='有效时间为15分钟')
     refreshToken: str = Field(title='刷新token', description='有效时间为7天')
     tokenExpireTime: int = Field(title='请求token过期时间戳')
     refreshTokenExpireTime: int = Field(title='刷新token过期时间戳')
+
+    class Config:
+        title = "登陆回传值"
 
 
 @authorization_blueprint.post('login')
@@ -92,10 +99,16 @@ async def login(request: Request, body: _LoginRequest):
 class _RefreshTokenRequest(BaseModel):
     refreshToken: str = Field(title='刷新token')
 
+    class Config:
+        title = "刷新token请求值"
+
 
 class _RefreshTokenResponse(ApiResponse):
     token: str = Field(title='请求token')
     tokenExpireTime: int = Field(title='请求token过期时间戳')
+
+    class Config:
+        title = "刷新token回传值"
 
 
 def _decode_token(token: str) -> dict:
@@ -137,6 +150,9 @@ async def refresh_token(request: Request, body: _RefreshTokenRequest):
 class AuthorizedUser(BaseModel):
     username: str
     password: str
+
+    class Config:
+        title = "经验证的用户"
 
 
 def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optional[list[LoginApplyType]] = None,
