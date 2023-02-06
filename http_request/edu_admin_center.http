@@ -1,0 +1,38 @@
+POST http://{{host}}:{{port}}/v1/authorization/login
+Content-Type: application/json
+
+{
+  "apiKey": "{{wx_mini_app_key}}",
+  "applyType": "WX_Mini_APP",
+  "username": "{{auth}}",
+  "password": "{{password}}"
+}
+
+> {%
+client.global.set("token", response.body.data.token)
+%}
+###
+
+POST http://{{host}}:{{port}}/v1/notification/validateAuth
+Authorization: Bearer {{token}}
+###
+POST http://{{host}}:{{port}}/v1/notification/fetchExam
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "sid": "{{sid}}"
+}
+
+###
+
+POST http://{{host}}:{{port}}/v1/notification/fetchScore
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "sid": "{{sid}}",
+  "is_minor": true
+}
+
+###
