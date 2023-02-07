@@ -1,5 +1,3 @@
-from functools import partial
-
 from sanic import Sanic
 
 from _321CQU.tools.gRPCManager import gRPCManager
@@ -10,6 +8,10 @@ from utils.SqlManager import SqlManager, SqliteManager
 from api import *
 
 app = Sanic('API_Gateway', log_config=LogConfig)
+
+app.config.CORS_ORIGINS = ["http://321cqu.com", "https://321cqu.com", "http://api.321cqu.com", "https://api.321cqu.com"]
+app.config.CORS_SUPPORTS_CREDENTIALS = True
+
 app.error_handler = _321CQUErrorHandler()
 
 app.ext.add_dependency(SqlManager, SqliteManager)

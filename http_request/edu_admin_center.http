@@ -12,6 +12,7 @@ User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like 
 > {%
 client.global.set("token", response.body.data.token)
 %}
+
 ###
 
 POST http://{{host}}/v1/edu_admin_center/validateAuth
