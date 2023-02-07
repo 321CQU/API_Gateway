@@ -1,9 +1,10 @@
-POST http://{{host}}:{{port}}/v1/authorization/login
+POST http://{{host}}/v1/authorization/login
 Content-Type: application/json
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 
 {
-  "apiKey": "{{wx_mini_app_key}}",
-  "applyType": "WX_Mini_APP",
+  "apiKey": "{{ios_app_key}}",
+  "applyType": "IOS_APP",
   "username": "{{auth}}",
   "password": "{{password}}"
 }
@@ -13,11 +14,38 @@ client.global.set("token", response.body.data.token)
 %}
 ###
 
-POST http://{{host}}:{{port}}/v1/notification/validateAuth
+POST http://{{host}}/v1/edu_admin_center/validateAuth
 Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
 ###
-POST http://{{host}}:{{port}}/v1/notification/fetchExam
+
+POST http://{{host}}/v1/edu_admin_center/fetchEnrollCourseInfo
 Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "is_major": true
+}
+
+###
+
+POST http://{{host}}/v1/edu_admin_center/fetchEnrollCourseItem
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "id": "10000004360",
+  "is_major": true
+}
+
+###
+
+POST http://{{host}}/v1/edu_admin_center/fetchExam
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 Content-Type: application/json
 
 {
@@ -26,13 +54,44 @@ Content-Type: application/json
 
 ###
 
-POST http://{{host}}:{{port}}/v1/notification/fetchScore
+POST http://{{host}}/v1/edu_admin_center/fetchCourseTimetable
 Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "code": "{{sid}}",
+  "offset": 0
+}
+
+###
+
+POST http://{{host}}/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "code": "{{sid}}",
+  "offset": 1
+}
+
+###
+
+POST http://{{host}}/v1/edu_admin_center/fetchScore
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 Content-Type: application/json
 
 {
   "sid": "{{sid}}",
-  "is_minor": true
+  "is_minor": false
 }
+
+###
+
+POST http://{{host}}/v1/edu_admin_center/fetchGpaRanking
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 
 ###
