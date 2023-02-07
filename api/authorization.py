@@ -9,7 +9,7 @@ from sanic import Request, Blueprint
 from jose import jwt
 from sanic_ext.exceptions import InitError
 
-from api.utils.ApiInterface import api_request, api_response, ApiResponse
+from api.utils.ApiInterface import api_request, api_response
 
 from utils.Exceptions import _321CQUException
 from utils.Settings import ConfigManager
@@ -59,7 +59,7 @@ class _LoginRequest(BaseModel):
         title = "登陆请求值"
 
 
-class _LoginResponse(ApiResponse):
+class _LoginResponse(BaseModel):
     token: str = Field(title='请求token', description='有效时间为15分钟')
     refreshToken: str = Field(title='刷新token', description='有效时间为7天')
     tokenExpireTime: int = Field(title='请求token过期时间戳')
@@ -103,7 +103,7 @@ class _RefreshTokenRequest(BaseModel):
         title = "刷新token请求值"
 
 
-class _RefreshTokenResponse(ApiResponse):
+class _RefreshTokenResponse(BaseModel):
     token: str = Field(title='请求token')
     tokenExpireTime: int = Field(title='请求token过期时间戳')
 
@@ -176,7 +176,7 @@ def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optio
 
             if (payload.applyType in exclude if exclude is not None else False) \
                     or (payload.applyType not in include if include is not None else False):
-                raise _321CQUException(error_info='Unauthorized', status_code=401)
+                raise _321CQUException(error_info='No Access', status_code=403)
 
             if need_user:
                 if payload.username is None or payload.password is None:

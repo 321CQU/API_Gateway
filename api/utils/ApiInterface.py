@@ -17,7 +17,7 @@ from grpc.aio import AioRpcError
 
 from utils.Exceptions import _321CQUException
 
-__all__ = ['ApiInterface', 'api_request', 'ApiResponse', 'api_response', 'handle_grpc_error']
+__all__ = ['api_request', 'api_response', 'handle_grpc_error']
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -29,13 +29,6 @@ class BaseApiResponse(GenericModel, Generic[T]):
     status: int = Field(title='响应状态', description='成功时为1，失败时为0')
     msg: str = Field(title='响应信息', description='成功时为`success`，失败时为相关错误提示')
     data: T | None = Field(title="数据")
-
-
-class ApiResponse(BaseModel):
-    """
-    API响应公共父类，所有响应模型请继承该类
-    """
-    pass
 
 
 def api_request(
@@ -96,7 +89,7 @@ def api_request(
     return decorator
 
 
-def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] = None, status: int = 200, description: str = '',
+def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = None, status: int = 200, description: str = '',
                  *, auto_wrap: bool = True, **kwargs):
     """
     实现参数返回值自动包装与API页面生成的装饰器
@@ -126,7 +119,7 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] 
             OperationStore()[decorated_function] = OperationStore().pop(f)
 
         if auto_wrap:
-            if inspect.isclass(retval) and issubclass(retval, ApiResponse):
+            if inspect.isclass(retval) and issubclass(retval, BaseModel):
                 OperationStore()[decorated_function].response(
                     status, {
                         'application/json': openapi.Component(BaseApiResponse[retval], name=retval.Config.title)
@@ -142,13 +135,6 @@ def api_response(retval: Optional[Union[Type[ApiResponse], Dict, HTTPResponse]] 
         return decorated_function
 
     return decorator
-
-
-class ApiInterface(HTTPMethodView):
-    """
-    所有API调用的公共父类，API调用请继承该类
-    """
-    pass
 
 
 def handle_grpc_error(func):
