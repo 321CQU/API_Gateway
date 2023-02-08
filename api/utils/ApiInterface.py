@@ -2,8 +2,7 @@ import inspect
 from functools import wraps
 from typing import Callable, Type, TypeVar, Generic, Dict, Optional, Union
 
-from sanic.views import HTTPMethodView
-from sanic.response import HTTPResponse, JSONResponse
+from sanic.response import HTTPResponse
 
 from sanic_ext.exceptions import InitError
 from sanic_ext.extensions.openapi.builders import OperationStore
@@ -14,6 +13,7 @@ from pydantic import BaseModel, ValidationError, Field
 from pydantic.generics import GenericModel
 
 from grpc.aio import AioRpcError
+from grpc import StatusCode
 
 from utils.Exceptions import _321CQUException
 
@@ -149,5 +149,8 @@ def handle_grpc_error(func):
                 ret = await ret
             return ret
         except AioRpcError as e:
+            if e.code() == StatusCode.UNAVAILABLE:
+                raise _321CQUException(error_info=e.details() if e.details() is not None else "服务调用异常",
+                                       extra=e.details(), status_code=503, quite=False)
             raise _321CQUException(error_info="服务调用异常", extra=e.details(), status_code=503, quite=False)
     return wrapped_function
