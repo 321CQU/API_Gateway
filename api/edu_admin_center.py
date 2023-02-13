@@ -34,6 +34,7 @@ class _ValidateAuthResponse(BaseModel):
     sid: str = Field(title="学号")
     auth: str = Field(title="统一身份认证号")
     name: str = Field(title="姓名")
+    uid: str = Field(title="用户身份标识")
 
     class Config:
         title = "验证账号回传值"
@@ -53,7 +54,7 @@ async def validate_auth(request: Request, user: AuthorizedUser, grpc_manager: gR
         res: eac_models.ValidateAuthResponse = await stub.ValidateAuth(
             mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password)
         )
-        return _ValidateAuthResponse(sid=res.sid, auth=res.auth, name=res.name)
+        return _ValidateAuthResponse(sid=res.sid, auth=res.auth, name=res.name, uid=res.uid)
 
 
 class _FetchEnrollCourseInfoRequest(BaseModel):
