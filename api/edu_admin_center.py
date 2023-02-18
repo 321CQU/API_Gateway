@@ -1,11 +1,12 @@
-from typing import List, Dict
+from typing import List, Dict, Any, Generator, Callable
 
 import google.protobuf.message
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, errors
 from sanic import Request, Blueprint
 from google.protobuf.json_format import MessageToDict
 
-from _321CQU.tools import gRPCManager, ServiceEnum
+from _321CQU.tools import gRPCManager
+from _321CQU.service import ServiceEnum
 import micro_services_protobuf.edu_admin_center.eac_service_pb2_grpc as eac_grpc
 import micro_services_protobuf.edu_admin_center.eac_models_pb2 as eac_models
 import micro_services_protobuf.mycqu_service.mycqu_request_response_pb2 as mycqu_rr
@@ -54,7 +55,7 @@ async def validate_auth(request: Request, user: AuthorizedUser, grpc_manager: gR
         res: eac_models.ValidateAuthResponse = await stub.ValidateAuth(
             mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password)
         )
-        return _ValidateAuthResponse(sid=res.sid, auth=res.auth, name=res.name, uid=res.uid)
+        return _ValidateAuthResponse(sid=res.sid, auth=res.auth, name=res.name, uid=res.uid.hex())
 
 
 class _FetchEnrollCourseInfoRequest(BaseModel):
@@ -234,16 +235,9 @@ async def fetch_score(request: Request, body: _FetchScoreRequest, user: Authoriz
         return _FetchScoreResponse.parse_obj(_message_to_dict(res))
 
 
-class _FetchGpaRankingResponse(BaseModel):
-    result: GpaRanking = Field("绩点排名")
-
-    class Config:
-        title = "绩点排名查询返回值"
-
-
 @edu_admin_center_blueprint.post(uri='fetchGpaRanking')
 @api_request()
-@api_response(_FetchGpaRankingResponse)
+@api_response(GpaRanking)
 @authorized(need_user=True)
 @handle_grpc_error
 async def fetch_gpa_ranking(request: Request, user: AuthorizedUser, grpc_manager: gRPCManager):
@@ -255,4 +249,4 @@ async def fetch_gpa_ranking(request: Request, user: AuthorizedUser, grpc_manager
         res: mycqu_model.GpaRanking = await stub.FetchGpaRanking(
             mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password)
         )
-        return _FetchGpaRankingResponse(result=GpaRanking.parse_obj(_message_to_dict(res)))
+        return GpaRanking.parse_obj(_message_to_dict(res))
