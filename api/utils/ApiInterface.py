@@ -74,7 +74,7 @@ def api_request(
                 if query:
                     kwargs[query_argument] = query.parse_obj(request.args)
             except ValidationError as e:
-                raise _321CQUException(error_info=f"请求参数错误，报错信息：{e.json()}", quite=True)
+                raise _321CQUException(error_info=f"请求参数错误", quite=True)
             retval = f(*args, **kwargs)
             if inspect.isawaitable(retval):
                 retval = await retval
@@ -152,5 +152,8 @@ def handle_grpc_error(func):
             if e.code() == StatusCode.UNAVAILABLE:
                 raise _321CQUException(error_info=e.details() if e.details() is not None else "服务调用异常",
                                        extra=e.details(), status_code=503, quite=False)
+            elif e.code() == StatusCode.INVALID_ARGUMENT:
+                raise _321CQUException(error_info=e.details() if e.details() is not None else "服务调用异常",
+                                       extra=e.details(), status_code=503, quite=True)
             raise _321CQUException(error_info="服务调用异常", extra=e.details(), status_code=503, quite=False)
     return wrapped_function

@@ -29,7 +29,8 @@ class _321CQUErrorHandler(ErrorHandler):
     def default(self, request, exception: SanicException):
         if isinstance(exception, _321CQUException):
             self.log(request, exception)
-            error_logger.exception(f"request token is {request.token}, request param is {request.body.decode()}")
+            if exception.quite:
+                error_logger.exception(f"request token is {request.token}, request param is {request.body.decode()}")
             return json({'status': 0, 'msg': exception.error_info, 'data': exception.context},
                         status=exception.status_code)
         else:

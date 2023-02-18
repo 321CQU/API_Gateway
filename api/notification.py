@@ -1,5 +1,5 @@
 import json
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from pydantic import BaseModel, Field, Json
 
@@ -29,7 +29,7 @@ class _UpdateSubscribeRequest(BaseModel):
     uid: str = Field(title='用户身份标识符')
     event: NotificationEvent = Field(title="欲操作事件类型", description=NotificationEvent.get_all_events_description())
     is_subscribe: bool = Field(title="是否为订阅操作，true为订阅，false为取消订阅")
-    extra_data: Optional[Json] = Field(title='订阅事件可能需要的额外信息，json字符串格式传送')
+    extra_data: Optional[Dict] = Field(title='订阅事件可能需要的额外信息，任意字典')
 
 
 @notification_blueprint.post(uri='updateSubscribe')
@@ -49,7 +49,7 @@ async def update_subscribe(request: Request, body: _UpdateSubscribeRequest, user
                 uid=bytes.fromhex(body.uid), event=body.event.value, is_subscribe=body.is_subscribe,
                 extra_data=event_pb2.UpdateEventSubscribeRequest.ExtraData(
                     auth=user.username, password=user.password,
-                    extra_data=(json.dumps(body.extra_data) if body.extra_data is not None else '')))
+                    extra_data=(json.dumps(body.extra_data) if body.extra_data is not None else None)))
         )
         if res.msg == 'success':
             return
@@ -108,7 +108,7 @@ async def set_user_apns(request: Request, body: _SetUserApnsRequest, grpc_manage
     async with grpc_manager.get_stub(ServiceEnum.ApnsService) as stub:
         stub: notification_grpc.ApnsStub = stub
         res: DefaultResponse = await stub.SetUserApns(
-            apns_pb2.SetUserApnsRequest(uid=bytes.fromhex(body.uid), apn=body.apn))
+            apns_pb2.SetUserApnsRequest(uid=bytes.fromhex(body.uid), apn=bytes.fromhex(body.apn)))
         if res.msg == 'success':
             return
         else:
