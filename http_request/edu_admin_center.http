@@ -96,3 +96,38 @@ Authorization: Bearer {{token}}
 User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 
 ###
+
+POST http://{{host}}/v1/notification/bindOpenId
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "uid": "{{uid}}",
+  "code": "1234"
+}
+
+###
+
+POST http://{{host}}/v1/notification/updateSubscribe
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "uid": "{{uid}}",
+  "event": 0,
+  "is_subscribe": false
+}
+
+###
+
+POST http://{{host}}/v1/notification/fetchSubscribeInfo
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+
+{
+  "uid": "{{uid}}"
+}
+

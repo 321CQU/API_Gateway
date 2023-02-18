@@ -74,7 +74,7 @@ def api_request(
                 if query:
                     kwargs[query_argument] = query.parse_obj(request.args)
             except ValidationError as e:
-                raise _321CQUException(error_info=f"请求参数错误，报错信息：{e.json()}", quiet=True)
+                raise _321CQUException(error_info=f"请求参数错误，报错信息：{e.json()}", quite=True)
             retval = f(*args, **kwargs)
             if inspect.isawaitable(retval):
                 retval = await retval

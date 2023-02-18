@@ -179,7 +179,8 @@ def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optio
                 raise _321CQUException(error_info='No Access', status_code=403)
 
             if need_user:
-                if payload.username is None or payload.password is None:
+                if payload.username is None or payload.password is None or \
+                        payload.username == '' or payload.password == '':
                     raise _321CQUException(error_info='User Info Not Found', status_code=401)
                 kwargs[user_argument] = AuthorizedUser(username=payload.username, password=payload.password)
 

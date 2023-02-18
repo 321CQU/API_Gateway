@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 import aiosqlite
 
+from _321CQU.tools import Singleton
 from _321CQU.sql_helper import SqlManager
 
 from utils.Exceptions import _321CQUException
@@ -11,7 +12,7 @@ from utils.Settings import ConfigManager, BASE_DIR
 __all__ = ['SqlManager', 'SqliteManager']
 
 
-class SqliteManager(SqlManager):
+class SqliteManager(metaclass=Singleton):
     def __init__(self):
         self.connect_args = (str(BASE_DIR) + ConfigManager().get_config('DatabaseSetting', 'dev_path'),)
 
