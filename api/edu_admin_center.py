@@ -16,8 +16,9 @@ from micro_services_protobuf.model.score import Score, GpaRanking
 from micro_services_protobuf.model.enroll import EnrollCourseInfo, EnrollCourseItem
 from micro_services_protobuf.model.course import CourseTimetable
 
-from api.authorization import authorized, LoginApplyType, AuthorizedUser
-from api.utils.ApiInterface import api_request, api_response, handle_grpc_error
+from .authorization import authorized, LoginApplyType, AuthorizedUser
+from .utils.ApiInterface import api_request, api_response, handle_grpc_error
+from .utils.tools import message_to_dict
 
 from utils.Exceptions import _321CQUException
 
@@ -25,10 +26,6 @@ from utils.Exceptions import _321CQUException
 __all__ = ['edu_admin_center_blueprint']
 
 edu_admin_center_blueprint = Blueprint('EduAdminCenter', url_prefix='/edu_admin_center')
-
-
-def _message_to_dict(message: google.protobuf.message.Message) -> Dict:
-    return MessageToDict(message, including_default_value_fields=True, preserving_proto_field_name=True)
 
 
 class _ValidateAuthResponse(BaseModel):
@@ -92,7 +89,7 @@ async def fetch_enroll_course_info(request: Request, body: _FetchEnrollCourseInf
         )
         result = {}
         for k, v in res.result.items():
-            result[k] = list(map(lambda x: EnrollCourseInfo.parse_obj(_message_to_dict(x)), v.info))
+            result[k] = list(map(lambda x: EnrollCourseInfo.parse_obj(message_to_dict(x)), v.info))
         return _FetchEnrollCourseInfoResponse(result=result)
 
 
@@ -131,7 +128,7 @@ async def fetch_enroll_course_item(request: Request, body: _FetchEnrollCourseIte
                 is_major=body.is_major
             )
         )
-        return _FetchEnrollCourseItemResponse.parse_obj(_message_to_dict(res))
+        return _FetchEnrollCourseItemResponse.parse_obj(message_to_dict(res))
 
 
 class _FetchExamRequest(BaseModel):
@@ -163,7 +160,7 @@ async def fetch_exam(request: Request, body: _FetchExamRequest, user: Authorized
             mycqu_rr.FetchExamRequest(base_login_info=mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password),
                                       stu_id=body.sid)
         )
-        return _FetchExamResponse.parse_obj(_message_to_dict(res))
+        return _FetchExamResponse.parse_obj(message_to_dict(res))
 
 
 class _FetchCourseTimetableRequest(BaseModel):
@@ -196,7 +193,7 @@ async def fetch_course_timetable(request: Request, body: _FetchCourseTimetableRe
             )
         )
         return _FetchCourseTimetableResponse(
-            timetables=list(map(lambda x: CourseTimetable.parse_obj(_message_to_dict(x)), res.course_timetables)),
+            timetables=list(map(lambda x: CourseTimetable.parse_obj(message_to_dict(x)), res.course_timetables)),
             start_date=res.start_date,
             end_date=res.end_date
         )
@@ -232,7 +229,7 @@ async def fetch_score(request: Request, body: _FetchScoreRequest, user: Authoriz
             eac_models.FetchScoreRequest(base_login_info=mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password),
                                          sid=body.sid,
                                          is_minor=body.is_minor))
-        return _FetchScoreResponse.parse_obj(_message_to_dict(res))
+        return _FetchScoreResponse.parse_obj(message_to_dict(res))
 
 
 @edu_admin_center_blueprint.post(uri='fetchGpaRanking')
@@ -249,4 +246,4 @@ async def fetch_gpa_ranking(request: Request, user: AuthorizedUser, grpc_manager
         res: mycqu_model.GpaRanking = await stub.FetchGpaRanking(
             mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password)
         )
-        return GpaRanking.parse_obj(_message_to_dict(res))
+        return GpaRanking.parse_obj(message_to_dict(res))

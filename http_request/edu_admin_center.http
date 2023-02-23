@@ -131,3 +131,27 @@ Content-Type: application/json
   "uid": "{{uid}}"
 }
 
+###
+
+GET http://{{host}}/v1/course_score_query/course?course_name=应用
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+###
+
+GET http://{{host}}/v1/course_score_query/course?teacher_name=王成
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+###
+
+GET http://{{host}}/v1/course_score_query/course?course_name=应用&teacher_name=王成
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+###
+
+GET http://{{host}}/v1/course_score_query/course/SSG00017
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
