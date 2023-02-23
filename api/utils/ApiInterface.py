@@ -38,7 +38,7 @@ def api_request(
         body_argument: str = "body",
         query_argument: str = "query",
         **kwargs
-) -> Callable[[T], T]:
+) -> Callable:
     """
     实现请求参数校验即OpenAPI文档生成的装饰器
 
@@ -50,9 +50,6 @@ def api_request(
     :param body_argument: 请求体中参数应当注入的名字，默认为"body"
     :param query_argument: 路由查询参数应当注入的名字，默认为"body"
     :param kwargs: 其他需要显示在/docs中的参数（需满足OpenAPI规范）
-    :param json_model_name: json 模型对应的参数
-    :param form_model_name: form 模型对应的参数
-    :param query_model_name: query 模型对应的参数
     """
 
     if json and form:
@@ -72,7 +69,10 @@ def api_request(
                 elif form:
                     kwargs[body_argument] = form.parse_obj(request.form)
                 if query:
-                    kwargs[query_argument] = query.parse_obj(request.args)
+                    parsed_args = {}
+                    for key, value in request.args.items():
+                        parsed_args[key] = value[0] if len(value) == 1 else value
+                    kwargs[query_argument] = query.parse_obj(parsed_args)
             except ValidationError as e:
                 raise _321CQUException(error_info=f"请求参数错误", quite=True)
             retval = f(*args, **kwargs)
@@ -84,6 +84,19 @@ def api_request(
             OperationStore()[decorated_function] = OperationStore().pop(f)
         if body_content is not None:
             OperationStore()[decorated_function].body(body_content, **params)
+        if query is not None:
+            schema = query.schema()
+            for name, value in inspect.get_annotations(query).items():
+                ex_param = {}
+                if schema.get('properties') is not None and schema['properties'].get(name) is not None:
+                    ex_param = schema['properties'][name]
+
+                description = (ex_param.get('title') if ex_param.get('title') else '') + (
+                    ex_param.get('description') if ex_param.get('description') else '')
+                if description == '':
+                    description = None
+
+                OperationStore()[decorated_function].parameter(name, value, 'query', description=description)
         return decorated_function
 
     return decorator
@@ -97,7 +110,6 @@ def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = 
     :param status: Response Http相应码
     :param description: 返回值相关描述，显示在/docs页面中
     :param auto_wrap: 强制关键字参数，为False时直接返回被装饰函数运行结果
-    :param model_name: 模型需要显示的名称
     :param kwargs: 其他需要显示在/docs中的参数（需满足OpenAPI规范）
     """
     def decorator(f):

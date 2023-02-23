@@ -19,7 +19,7 @@ from utils.Exceptions import _321CQUException
 
 __all__ = ['notification_blueprint']
 
-notification_blueprint = Blueprint('notification', url_prefix='/notification')
+notification_blueprint = Blueprint('Notification', url_prefix='/notification')
 
 
 class _UpdateSubscribeRequest(BaseModel):

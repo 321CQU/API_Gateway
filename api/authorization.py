@@ -16,7 +16,7 @@ from utils.Settings import ConfigManager
 
 __all__ = ['authorization_blueprint', 'authorized', 'LoginApplyType', 'TokenPayload', 'AuthorizedUser']
 
-authorization_blueprint = Blueprint('authorization', url_prefix='authorization')
+authorization_blueprint = Blueprint('Authorization', url_prefix='authorization')
 
 
 class LoginApplyType(StrEnum):
