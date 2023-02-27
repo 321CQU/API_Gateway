@@ -20,4 +20,4 @@ app.ext.add_dependency(gRPCManager, lambda: gRPCManager())
 app.blueprint(api_urls)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, access_log=True)
+    app.run(host='0.0.0.0', port=8000, access_log=True, single_process=True)

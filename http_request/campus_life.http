@@ -1,0 +1,34 @@
+POST http://{{host}}/v1/authorization/login
+Content-Type: application/json
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+{
+  "apiKey": "{{ios_app_key}}",
+  "applyType": "IOS_APP",
+  "username": "{{auth}}",
+  "password": "{{password}}"
+}
+
+> {%
+client.global.set("token", response.body.data.token)
+%}
+
+###
+
+GET http://{{host}}/v1/campus_lift/card
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+###
+
+GET http://{{host}}/v1/campus_lift/bill/card
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+###
+
+GET http://{{host}}/v1/campus_lift/bill/dorm_energy?is_huxi=true&room=b5321
+Authorization: Bearer {{token}}
+User-Agent:'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+
+
