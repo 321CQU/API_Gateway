@@ -26,9 +26,17 @@ class LoginApplyType(StrEnum):
     WX_Mini_APP = 'WX_Mini_APP'
     IOS_APP = 'IOS_APP'
     Announcement_Website = 'Announcement_Website'
+    Recruit = 'Recruit'
 
     def check_api_key(self, api_key: str) -> bool:
         return api_key == ConfigManager().get_config('ApiKey', self.value())
+
+    @property
+    def need_explicit_allow(self) -> bool:
+        if self == LoginApplyType.Recruit:
+            return True
+        else:
+            return False
 
 
 class TokenPayload(BaseModel):
@@ -176,6 +184,10 @@ def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optio
 
             if (payload.applyType in exclude if exclude is not None else False) \
                     or (payload.applyType not in include if include is not None else False):
+                raise _321CQUException(error_info='No Access', status_code=403)
+
+            if LoginApplyType(payload.applyType).need_explicit_allow and \
+                    (include is None or payload.applyType not in include):
                 raise _321CQUException(error_info='No Access', status_code=403)
 
             if need_user:
