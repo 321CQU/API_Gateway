@@ -15,11 +15,11 @@ from sanic_ext.extensions.openapi.definitions import Parameter
 
 from .authorization import authorized
 from .utils.ApiInterface import api_request, api_response, handle_grpc_error
+from .utils.tools import message_to_dict
 
 
 __all__ = ['course_score_query_blueprint']
 
-from .utils.tools import message_to_dict
 
 course_score_query_blueprint = Blueprint('CourseScoreQuery', url_prefix='/course_score_query')
 

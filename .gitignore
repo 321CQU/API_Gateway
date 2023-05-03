@@ -194,3 +194,4 @@ cython_debug/
 dev_database
 logs/
 *.private.env.json
+/test.py
