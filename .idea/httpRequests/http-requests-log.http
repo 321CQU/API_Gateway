@@ -1,3 +1,587 @@
+POST http://127.0.0.1:8000/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODc0NjE0MTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.VBMMqWGRieLizJ9Zi5aSH2lZX1LUPKh-xJB5TW2XLS8
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20204051",
+  "offset": 1
+}
+
+<> 2023-06-23T030215.503.json
+
+###
+
+POST http://127.0.0.1:8000/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODc0NjE0MTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.VBMMqWGRieLizJ9Zi5aSH2lZX1LUPKh-xJB5TW2XLS8
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20204051",
+  "offset": 0
+}
+
+<> 2023-06-23T030202.200.json
+
+###
+
+POST http://127.0.0.1:8000/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-06-23T030158.200.json
+
+###
+
+POST http://127.0.0.1:8000/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODc0NjEzNzQsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.IlQqIfT8wf5ifQ0yKa5kvT0weSTC0L2i4ZeO6NHwnEA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20204051",
+  "offset": 0
+}
+
+<> 2023-06-23T030124.500.json
+
+###
+
+POST http://127.0.0.1:8000/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-06-23T030114.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODc0NjAyNjksImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.V_-7kjam35CEKO0EdpvCTIwBdD0cdhDiqoioehZJS4A
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20204051",
+  "offset": 0
+}
+
+<> 2023-06-23T024258.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-06-23T024249.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODQ5MDgyNzYsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjMwMDE2MzMxIiwicGFzc3dvcmQiOiJaaGFvdGFvMTIzISJ9.7IKB8238yDnSLgfd0OD9E9G1ZbQufutjz2cT2DwlUcs
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20214368",
+  "offset": 0
+}
+
+<> 2023-05-24T135006.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 123
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "30016331",
+  "password": "Zhaotao123!"
+}
+
+<> 2023-05-24T134936.200.json
+
+###
+
+GET http://127.0.0.1:8000/v1/library/borrow?is_curr=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODQ0MzAxMTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.XHWFxc4v9E7Yw75F0R4imfdW9_NRwWm7DlP9Jq5T41Q
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-19T010250.200.json
+
+###
+
+POST http://127.0.0.1:8000/v1/library/borrow?book_id=427583933405660100
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODQ0MzAxMTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.XHWFxc4v9E7Yw75F0R4imfdW9_NRwWm7DlP9Jq5T41Q
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-19T010031.200.json
+
+###
+
+POST http://127.0.0.1:8000/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-19T010018.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODQyOTMzMTYsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.zbcImXKMVVDvHHi7rAlKQlilab3UTYpVqzUFlpPnUfE
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-17T110043.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=false
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODQyOTMzMTYsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.zbcImXKMVVDvHHi7rAlKQlilab3UTYpVqzUFlpPnUfE
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-17T110022.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-17T110016.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=false
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODM5ODU0MDQsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.D0JbbAFGR7dvlgVmFPyvdLCE-209frpBMPe1Pi6_QDA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-13T213416.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODM5ODU0MDQsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.D0JbbAFGR7dvlgVmFPyvdLCE-209frpBMPe1Pi6_QDA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-13T212832.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-13T212824.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchGpaRanking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T025108-1.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchScore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 44
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "sid": "20204051",
+  "is_minor": false
+}
+
+<> 2023-05-04T025108.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20204051",
+  "offset": 1
+}
+
+<> 2023-05-04T025106.503.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchCourseTimetable
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "code": "20204051",
+  "offset": 0
+}
+
+<> 2023-05-04T025106.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchExam
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 23
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "sid": "20204051"
+}
+
+<> 2023-05-04T025105-1.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchEnrollCourseItem
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 45
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": "10000004360",
+  "is_major": true
+}
+
+<> 2023-05-04T025105.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/fetchEnrollCourseInfo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Type: application/json
+Content-Length: 22
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "is_major": true
+}
+
+<> 2023-05-04T025104.200.json
+
+###
+
+POST http://api.321cqu.com/v1/edu_admin_center/validateAuth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3NTgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.f-weC6x_daHgzFPNryP8lGluX0JUTzqiKIeAHBpCrj0
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T025101.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-04T025058.200.json
+
+###
+
+GET http://api.321cqu.com/v1/course_score_query/course/SSG00017
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3MzIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.DfIskxoePZeOVO07KM3wd1nwlrPSQR6X19OxoPZKEfA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T025033-2.200.json
+
+###
+
+GET http://api.321cqu.com/v1/course_score_query/course?course_name=应用&teacher_name=王成
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3MzIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.DfIskxoePZeOVO07KM3wd1nwlrPSQR6X19OxoPZKEfA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T025033-1.200.json
+
+###
+
+GET http://api.321cqu.com/v1/course_score_query/course?teacher_name=王成
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3MzIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.DfIskxoePZeOVO07KM3wd1nwlrPSQR6X19OxoPZKEfA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T025033.200.json
+
+###
+
+GET http://api.321cqu.com/v1/course_score_query/course?course_name=应用
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA3MzIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.DfIskxoePZeOVO07KM3wd1nwlrPSQR6X19OxoPZKEfA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T025032-1.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-04T025032.200.json
+
+###
+
+GET http://api.321cqu.com/v1/campus_lift/bill/dorm_energy?is_huxi=true&room=b5321
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2ODYsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.UgyaN4oytmZYXT2VKHas_YnKvldlSQa8vz_o3gbdmmA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024952.200.json
+
+###
+
+GET http://api.321cqu.com/v1/campus_lift/bill/card
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2ODYsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.UgyaN4oytmZYXT2VKHas_YnKvldlSQa8vz_o3gbdmmA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024951.200.json
+
+###
+
+GET http://api.321cqu.com/v1/campus_lift/card
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2ODYsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.UgyaN4oytmZYXT2VKHas_YnKvldlSQa8vz_o3gbdmmA
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024950.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-04T024946.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2MjksImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.uOH_uSZJvN3UoYlc0PSoODvyIF5UiMnb55Mqr9Maslk
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024933.200.json
+
+###
+
+POST http://api.321cqu.com/v1/library/borrow?book_id=427583933405660109
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2MjksImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.uOH_uSZJvN3UoYlc0PSoODvyIF5UiMnb55Mqr9Maslk
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024927.200.json
+
+###
+
+POST http://api.321cqu.com/v1/library/borrow?book_id=123456
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2MjksImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.uOH_uSZJvN3UoYlc0PSoODvyIF5UiMnb55Mqr9Maslk
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024853.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2MjksImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.uOH_uSZJvN3UoYlc0PSoODvyIF5UiMnb55Mqr9Maslk
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024852-1.200.json
+
+###
+
+GET http://api.321cqu.com/v1/library/borrow?is_curr=false
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDA2MjksImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.uOH_uSZJvN3UoYlc0PSoODvyIF5UiMnb55Mqr9Maslk
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-04T024852.200.json
+
+###
+
+POST http://api.321cqu.com/v1/authorization/login
+Content-Type: application/json
+User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
+Content-Length: 122
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
+  "applyType": "IOS_APP",
+  "username": "07102028",
+  "password": "Zhud626300"
+}
+
+<> 2023-05-04T024849.200.json
+
+###
+
 POST http://127.0.0.1:8000/v1/library/borrow?book_id=123456
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2ODMxNDAwMDgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.-JexpER8lcWGJ6ezE9L0RTqLXn4bR6sgWSN26w0z8bM
 User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
@@ -90,546 +674,6 @@ Connection: Keep-Alive
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-03-06T231651.403.json
-
-###
-
-GET http://127.0.0.1:8000/v1/recruit/score
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzgxMTY1MjMsImFwcGx5VHlwZSI6IlJlY3J1aXQiLCJ1c2VybmFtZSI6bnVsbCwicGFzc3dvcmQiOm51bGx9.--_wTTGQ3ZMkFISIyFceXJtqdWPolkOM1xbjvfxz1es
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-03-06T231548.200.json
-
-###
-
-GET http://127.0.0.1:8000/v1/recruit/score
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzgxMTY1MjMsImFwcGx5VHlwZSI6IlJlY3J1aXQiLCJ1c2VybmFtZSI6bnVsbCwicGFzc3dvcmQiOm51bGx9.--_wTTGQ3ZMkFISIyFceXJtqdWPolkOM1xbjvfxz1es
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-03-06T231442.500.txt
-
-###
-
-GET http://127.0.0.1:8000/v1/recruit/score
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzgxMTY1MjMsImFwcGx5VHlwZSI6IlJlY3J1aXQiLCJ1c2VybmFtZSI6bnVsbCwicGFzc3dvcmQiOm51bGx9.--_wTTGQ3ZMkFISIyFceXJtqdWPolkOM1xbjvfxz1es
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-03-06T231353.500.txt
-
-###
-
-POST http://127.0.0.1:8000/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 66
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "hLrOSgvl5eUzJR1sSeen9g",
-  "applyType": "Recruit"
-}
-
-<> 2023-03-06T231343.200.json
-
-###
-
-POST http://127.0.0.1:8000/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 67
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "hLrOSgvl5eUzJR1sSeen9g",
-  "applyType": "Recruit",
-}
-
-<> 2023-03-06T231329.400.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchGpaRanking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023812.200.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchScore
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 44
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "sid": "20204051",
-  "is_minor": false
-}
-
-<> 2023-02-28T023811.200.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchCourseTimetable
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 39
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "code": "20204051",
-  "offset": 1
-}
-
-<> 2023-02-28T023810.503.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchCourseTimetable
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 39
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "code": "20204051",
-  "offset": 0
-}
-
-<> 2023-02-28T023810.200.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchExam
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 23
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "sid": "20204051"
-}
-
-<> 2023-02-28T023809-1.200.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchEnrollCourseItem
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 45
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "id": "10000004360",
-  "is_major": true
-}
-
-<> 2023-02-28T023809.200.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchEnrollCourseInfo
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 22
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "is_major": true
-}
-
-<> 2023-02-28T023808.503.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/validateAuth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5ODUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.RIcamV6K9Ta9Z6bokh5cf-fQINvAaayelYjp2oY_TYs
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023808.200.json
-
-###
-
-POST http://api.321cqu.com/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 122
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
-  "applyType": "IOS_APP",
-  "username": "07102028",
-  "password": "Zhud626300"
-}
-
-<> 2023-02-28T023805.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course/SSG00017
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NzgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.AxwcNCBf-DnHtrUfEZKlBc1CTWswaEjTGeqfRLiF1KM
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023759-2.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course?course_name=应用&teacher_name=王成
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NzgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.AxwcNCBf-DnHtrUfEZKlBc1CTWswaEjTGeqfRLiF1KM
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023759-1.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course?teacher_name=王成
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NzgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.AxwcNCBf-DnHtrUfEZKlBc1CTWswaEjTGeqfRLiF1KM
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023759.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course?course_name=应用
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NzgsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.AxwcNCBf-DnHtrUfEZKlBc1CTWswaEjTGeqfRLiF1KM
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023758-1.200.json
-
-###
-
-POST http://api.321cqu.com/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 122
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
-  "applyType": "IOS_APP",
-  "username": "07102028",
-  "password": "Zhud626300"
-}
-
-<> 2023-02-28T023758.200.json
-
-###
-
-GET http://api.321cqu.com/v1/campus_lift/bill/dorm_energy?is_huxi=true&room=b5321
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NDIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.vX0EML9c1aAlH7g7EuqEKgNNtV7Tx0ACgjohPfi_dfU
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023737.200.json
-
-###
-
-GET http://api.321cqu.com/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NDIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.vX0EML9c1aAlH7g7EuqEKgNNtV7Tx0ACgjohPfi_dfU
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023731.200.json
-
-###
-
-GET http://api.321cqu.com/v1/campus_lift/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjM5NDIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.vX0EML9c1aAlH7g7EuqEKgNNtV7Tx0ACgjohPfi_dfU
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T023729.200.json
-
-###
-
-POST http://api.321cqu.com/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 122
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
-  "applyType": "IOS_APP",
-  "username": "07102028",
-  "password": "Zhud626300"
-}
-
-<> 2023-02-28T023722.200.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T015911.200.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/dorm_energy?is_huxi=true&room=b5321
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T015909.200.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T015320.503.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T015219.503.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T014913.503.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T014849.503.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/dorm_energy?is_huxi=true&room=b5321
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T014528.200.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/bill/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T014525.503.json
-
-###
-
-GET http://127.0.0.1:8000/v1/campus_lift/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2Nzc1MjA4MTUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.EHDEKtm8KGnYZ50NfNeQ_ZDqwF6cDSXzE0MPcDyL0_E
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-28T014521.200.json
-
-###
-
-POST http://127.0.0.1:8000/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 122
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
-  "applyType": "IOS_APP",
-  "username": "07102028",
-  "password": "Zhud626300"
-}
-
-<> 2023-02-28T014515.200.json
-
-###
-
-POST http://api.321cqu.com/v1/edu_admin_center/fetchExam
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzczOTg3NzUsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.42OeFC41xGXKBNfoe2JM821qf8UwtavC5TqMoyUXwfk
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 23
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "sid": "20204051"
-}
-
-<> 2023-02-26T155121.200.json
-
-###
-
-POST http://api.321cqu.com/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 122
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
-  "applyType": "IOS_APP",
-  "username": "07102028",
-  "password": "Zhud626300"
-}
-
-<> 2023-02-26T155114.200.json
-
-###
-
-POST http://api.321cqu.com/v1/authorization/login
-Content-Type: application/json
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Length: 122
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "apiKey": "/FSBj33IDhn0VzXzuG/9oA==",
-  "applyType": "IOS_APP",
-  "username": "07102028",
-  "password": "Zhud626300"
-}
-
-<> 2023-02-24T122910.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course/SSG00017
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzcxNzk2NTIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.CYESUaNJUxA3ORdoy_fp1Pk_dgOuQTXGWANkd9CywB0
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-24T025921.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course?course_name=应用&teacher_name=王成
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzcxNzk2NTIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.CYESUaNJUxA3ORdoy_fp1Pk_dgOuQTXGWANkd9CywB0
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-24T025920-4.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course?teacher_name=王成
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzcxNzk2NTIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.CYESUaNJUxA3ORdoy_fp1Pk_dgOuQTXGWANkd9CywB0
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-24T025920-3.200.json
-
-###
-
-GET http://api.321cqu.com/v1/course_score_query/course?course_name=应用
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzcxNzk2NTIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.CYESUaNJUxA3ORdoy_fp1Pk_dgOuQTXGWANkd9CywB0
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-02-24T025920-2.200.json
-
-###
-
-POST http://api.321cqu.com/v1/notification/fetchSubscribeInfo
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzcxNzk2NTIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.CYESUaNJUxA3ORdoy_fp1Pk_dgOuQTXGWANkd9CywB0
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 79
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "uid": "4ab2946119e202985e9eb05ff48d7cc07a2e967b84ea886bc02451b53c96ea33"
-}
-
-<> 2023-02-24T025920-1.200.json
-
-###
-
-POST http://api.321cqu.com/v1/notification/updateSubscribe
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lc3RhbXAiOjE2NzcxNzk2NTIsImFwcGx5VHlwZSI6IklPU19BUFAiLCJ1c2VybmFtZSI6IjA3MTAyMDI4IiwicGFzc3dvcmQiOiJaaHVkNjI2MzAwIn0.CYESUaNJUxA3ORdoy_fp1Pk_dgOuQTXGWANkd9CywB0
-User-Agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
-Content-Type: application/json
-Content-Length: 118
-Connection: Keep-Alive
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "uid": "4ab2946119e202985e9eb05ff48d7cc07a2e967b84ea886bc02451b53c96ea33",
-  "event": 0,
-  "is_subscribe": false
-}
-
-<> 2023-02-24T025920.503.json
 
 ###
 

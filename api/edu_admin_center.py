@@ -170,6 +170,7 @@ class _FetchCourseTimetableResponse(BaseModel):
     timetables: List[CourseTimetable] = Field(title="课表信息")
     start_date: str = Field(title="学期起始日期，'yyyy-mm-dd'格式")
     end_date: str = Field(title="学期结束日期，'yyyy-mm-dd'格式")
+    session_name: str = Field(title="学期名称，如'2023秋'")
 
 
 @edu_admin_center_blueprint.post(uri='fetchCourseTimetable')
@@ -193,7 +194,8 @@ async def fetch_course_timetable(request: Request, body: _FetchCourseTimetableRe
         return _FetchCourseTimetableResponse(
             timetables=list(map(lambda x: CourseTimetable.parse_obj(message_to_dict(x)), res.course_timetables)),
             start_date=res.start_date,
-            end_date=res.end_date
+            end_date=res.end_date,
+            session_name=res.session_name
         )
 
 
