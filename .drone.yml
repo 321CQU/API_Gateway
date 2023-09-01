@@ -31,7 +31,7 @@ steps:
     - cd ./API_Gateway/
     - docker build -t $${API_GATEWAY_IMAGE} .
     - cd $${_321CQU_PUBLIC_REPOSITORY_PATH}
-    - docker-compose up -d 321cqu-api-gateway
+    - docker-compose up -d $${API_GATEWAY_SERVER_NAME}
     - docker image prune -f
   depends_on:
     - clone
