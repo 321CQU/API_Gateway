@@ -21,15 +21,17 @@ steps:
   commands:
     - git config --global http.proxy http://127.0.0.1:7890
     - git config --global https.proxy http://127.0.0.1:7890
-    - git clone https://github.com/ZhuLegend/321CQU_APIGateway.git
-    - cd ./321CQU_APIGateway/
+    - git clone https://github.com/321CQU/API_Gateway.git
+    - cd ./API_Gateway/
     - git checkout main
 
 - name: 新建镜像
   commands:
-    - cd ./321CQU_APIGateway/
-    - docker-compose build
-    - docker-compose up -d
+    - source $${_321CQU_PUBLIC_REPOSITORY_PATH}/.env
+    - cd ./API_Gateway/
+    - docker build -t $${API_GATEWAY_IMAGE} .
+    - cd $${_321CQU_PUBLIC_REPOSITORY_PATH}
+    - docker-compose up -d 321cqu-api-gateway
     - docker image prune -f
   depends_on:
     - clone
@@ -61,6 +63,16 @@ steps:
       message_color: true
       message_pic: true
       sha_link: true
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
+    - merge
+  status:
+    - success
+    - failure
 
 depends_on:
   - 部署API网关
