@@ -7,9 +7,11 @@ from .course_score_query import *
 from .campus_life import *
 from .recruit import *
 from .library import *
+from .important_info import *
 
 __all__ = ['api_urls', 'authorized', 'LoginApplyType', 'TokenPayload', 'AuthorizedUser']
 
 api_urls = Blueprint.group(notification_blueprint, authorization_blueprint, edu_admin_center_blueprint,
                            course_score_query_blueprint, campus_life_blueprint, recruit_blueprint, library_blueprint,
+                           important_info_blueprint,
                            version=1)
