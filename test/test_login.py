@@ -2,13 +2,11 @@ import pytest
 from sanic import Sanic, Request
 from sanic.response import json
 from sanic_testing.testing import SanicASGITestClient
-from jose import jwt
 
 from api import authorized, LoginApplyType, AuthorizedUser, TokenPayload
 from api.authorization import _LoginResponse, _RefreshTokenResponse, _decode_token
-from utils.Settings import ConfigManager
-
 from test import test_client, app
+from utils.Settings import ConfigManager
 
 _login_params = {
     'apiKey': ConfigManager().get_config('ApiKey', 'WX_Mini_APP'), 'applyType': 'WX_Mini_APP',
@@ -31,7 +29,7 @@ async def test_authorize(test_client: SanicASGITestClient):
     )
     assert response2.status == 200
 
-    res = _LoginResponse.parse_obj(response2.json['data'])
+    res = _LoginResponse.model_validate(response2.json['data'])
     token_data: TokenPayload = TokenPayload.parse_obj(_decode_token(res.token))
     assert token_data.timestamp == res.tokenExpireTime
     assert token_data.applyType == 'WX_Mini_APP'
@@ -56,7 +54,7 @@ async def get_success_login_response(test_client: SanicASGITestClient, without_u
     )
     assert response.status == 200
 
-    return _LoginResponse.parse_obj(response.json['data'])
+    return _LoginResponse.model_validate(response.json['data'])
 
 
 @pytest.mark.asyncio
@@ -69,7 +67,7 @@ async def test_refresh_token(test_client: SanicASGITestClient):
     )
     assert response.status == 200
 
-    res = _RefreshTokenResponse.parse_obj(response.json['data'])
+    res = _RefreshTokenResponse.model_validate(response.json['data'])
     token_data: TokenPayload = TokenPayload.parse_obj(_decode_token(res.token))
     assert token_data.timestamp == res.tokenExpireTime
     assert token_data.applyType == 'WX_Mini_APP'
@@ -82,7 +80,7 @@ async def test_authorized_include(app: Sanic):
     @app.post('test1')
     @authorized(include=[LoginApplyType.WX_Mini_APP], need_user=True)
     def test1(request: Request, user: AuthorizedUser):
-        return json(user.dict())
+        return json(user.model_dump())
 
     test_client = SanicASGITestClient(app)
 
@@ -102,7 +100,7 @@ async def test_authorized_exclude(app: Sanic):
     @app.post('test1')
     @authorized(exclude=[LoginApplyType.WX_Mini_APP])
     def test1(request: Request, user: AuthorizedUser):
-        return json(user.dict())
+        return json(user.model_dump())
 
     test_client = SanicASGITestClient(app)
 
@@ -121,7 +119,7 @@ async def test_when_no_user(app: Sanic):
     @app.post('test1')
     @authorized(include=[LoginApplyType.WX_Mini_APP], need_user=True)
     def test1(request: Request, user: AuthorizedUser):
-        return json(user.dict())
+        return json(user.model_dump())
 
     test_client = SanicASGITestClient(app)
 

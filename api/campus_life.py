@@ -1,21 +1,17 @@
-from typing import List, Dict, Any, Generator, Callable
+from typing import List
 
+import micro_services_protobuf.mycqu_service.mycqu_model_pb2 as mycqu_model
+import micro_services_protobuf.mycqu_service.mycqu_request_response_pb2 as mycqu_rr
+import micro_services_protobuf.mycqu_service.mycqu_service_pb2_grpc as mycqu_grpc
+from _321CQU.service import ServiceEnum
+from _321CQU.tools import gRPCManager
+from micro_services_protobuf.model.card import Card, Bill, EnergyFees
 from pydantic import BaseModel, Field
 from sanic import Request, Blueprint
 
-from _321CQU.tools import gRPCManager
-from _321CQU.service import ServiceEnum
-import micro_services_protobuf.mycqu_service.mycqu_request_response_pb2 as mycqu_rr
-import micro_services_protobuf.mycqu_service.mycqu_model_pb2 as mycqu_model
-import micro_services_protobuf.mycqu_service.mycqu_service_pb2_grpc as mycqu_grpc
-from micro_services_protobuf.model.card import Card, Bill, EnergyFees
-
-from .authorization import authorized, LoginApplyType, AuthorizedUser
+from .authorization import authorized, AuthorizedUser
 from .utils.ApiInterface import api_request, api_response, handle_grpc_error
 from .utils.tools import message_to_dict
-
-from utils.Exceptions import _321CQUException
-
 
 __all__ = ['campus_life_blueprint']
 
@@ -35,7 +31,7 @@ async def fetch_card(request: Request, user: AuthorizedUser, grpc_manager: gRPCM
         stub: mycqu_grpc.CardFetcherStub
         res: mycqu_model.Card = await stub.FetchCard(mycqu_rr.BaseLoginInfo(auth=user.username, password=user.password))
 
-    return Card.parse_obj(message_to_dict(res))
+    return Card.model_validate(message_to_dict(res))
 
 
 class FetchBillsResponse(BaseModel):
@@ -56,7 +52,7 @@ async def fetch_bill(request: Request, user: AuthorizedUser, grpc_manager: gRPCM
         stub: mycqu_grpc.CardFetcherStub
         res: mycqu_rr.FetchBillResponse = await stub.FetchBills(mycqu_rr.BaseLoginInfo(auth=user.username,
                                                                                        password=user.password))
-    return FetchBillsResponse.parse_obj(message_to_dict(res))
+    return FetchBillsResponse.model_validate(message_to_dict(res))
 
 
 class FetchDormEnergyRequest(BaseModel):
@@ -84,4 +80,4 @@ async def fetch_dorm_energy(request: Request, query: FetchDormEnergyRequest,
                 room=query.room
             )
         )
-    return EnergyFees.parse_obj(message_to_dict(res))
+    return EnergyFees.model_validate(message_to_dict(res))

@@ -1,7 +1,7 @@
 import random
 from typing import List
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from sanic import Request, Blueprint
 
 from micro_services_protobuf.model.score import Score, Course
@@ -19,8 +19,7 @@ recruit_blueprint = Blueprint('Recruit', url_prefix='/recruit')
 class _FetchScoreResponse(BaseModel):
     scores: List[Score] = Field(title="成绩")
 
-    class Config:
-        title = "成绩查询回传值"
+    model_config = ConfigDict(title="获取成绩信息回传值")
 
 
 @recruit_blueprint.get(uri='score')

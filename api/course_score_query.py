@@ -1,22 +1,19 @@
-from typing import List, Dict, Any, Generator, Callable, Optional
+from typing import List, Optional
 
-from micro_services_protobuf.model.cqu_session import CQUSession
-from pydantic import BaseModel, Field
-from sanic import Request, Blueprint
-from sanic_ext import openapi, validate
-
-from _321CQU.tools import gRPCManager
-from _321CQU.service import ServiceEnum
-
-import micro_services_protobuf.course_score_query.service_pb2_grpc as csq_grpc
 import micro_services_protobuf.course_score_query.model_pb2 as csq_model
+import micro_services_protobuf.course_score_query.service_pb2_grpc as csq_grpc
+from _321CQU.service import ServiceEnum
+from _321CQU.tools import gRPCManager
 from micro_services_protobuf.model.course import Course
+from micro_services_protobuf.model.cqu_session import CQUSession
+from pydantic import BaseModel, Field, model_validator
+from sanic import Request, Blueprint
+from sanic_ext import openapi
 from sanic_ext.extensions.openapi.definitions import Parameter
 
 from .authorization import authorized
 from .utils.ApiInterface import api_request, api_response, handle_grpc_error
 from .utils.tools import message_to_dict
-
 
 __all__ = ['course_score_query_blueprint']
 
@@ -30,8 +27,14 @@ class _FindCourseByNameRequest(BaseModel):
 
     两个关键词仅有一个能生效，优先基于课程关键词进行搜索
     """
-    course_name: Optional[str] = Field(title="课程名关键词")
-    teacher_name: Optional[str] = Field(title="教师名关键词")
+    course_name: Optional[str] = Field(default=None, title="课程名关键词")
+    teacher_name: Optional[str] = Field(default=None, title="教师名关键词")
+
+    @model_validator(mode='after')
+    def check_has_at_least_one_param(self) -> '_FindCourseByNameRequest':
+        if self.course_name is None and self.teacher_name is None:
+            raise ValueError("至少需要一个参数")
+        return self
 
 
 class _FindCourseByNameResponse(BaseModel):
@@ -55,7 +58,7 @@ async def find_course_by_name(request: Request, query: _FindCourseByNameRequest,
         res: csq_model.FindCourseByNameResponse = await stub.FindCourseByName(
             csq_model.FindCourseByNameRequest(teacher_name=query.teacher_name,
                                               course_name=query.course_name))
-    return _FindCourseByNameResponse.parse_obj(message_to_dict(res))
+    return _FindCourseByNameResponse.model_validate(message_to_dict(res))
 
 
 class _LayeredTermScoreDetail(BaseModel):
@@ -106,5 +109,5 @@ async def fetch_layered_score_detail(request: Request, cid: str, grpc_manager: g
 
     return _FetchLayeredScoreDetailResponse(
         course_code=res.course_code, course_name=res.course_name,
-        score_details=list(map(lambda x: _LayeredScoreDetail.parse_obj(message_to_dict(x)), res.score_details))
+        score_details=list(map(lambda x: _LayeredScoreDetail.model_validate(message_to_dict(x)), res.score_details))
     )

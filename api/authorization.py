@@ -4,7 +4,7 @@ from enum import StrEnum
 from functools import wraps
 from typing import Optional, Type, Any
 
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, ValidationError, Field, ConfigDict
 from sanic import Request, Blueprint
 from jose import jwt
 from sanic_ext.exceptions import InitError
@@ -42,17 +42,15 @@ class LoginApplyType(StrEnum):
 class TokenPayload(BaseModel):
     timestamp: int
     applyType: LoginApplyType
-    username: Optional[str]
-    password: Optional[str]
+    username: Optional[str] = None
+    password: Optional[str] = None
 
-    class Config:
-        title = "token荷载"
-        use_enum_values = True
+    model_config = ConfigDict(title="token荷载", use_enum_values=True)
 
     @classmethod
     def parse_obj(cls: Type['Model'], obj: Any) -> 'Model':
         try:
-            return super().parse_obj(obj)
+            return super().model_validate(obj)
         except ValidationError as e:
             raise _321CQUException(error_info='Unauthorized', status_code=401, extra={'error': e.json()})
 
@@ -60,11 +58,10 @@ class TokenPayload(BaseModel):
 class _LoginRequest(BaseModel):
     apiKey: str = Field(title="api 请求密钥")
     applyType: LoginApplyType = Field(title='请求类型')
-    username: Optional[str] = Field(title='用户账户')
-    password: Optional[str] = Field(title='用户密码')
+    username: Optional[str] = Field(default=None, title='用户账户')
+    password: Optional[str] = Field(default=None, title='用户密码')
 
-    class Config:
-        title = "登陆请求值"
+    model_config = ConfigDict(title="登陆请求值", use_enum_values=True)
 
 
 class _LoginResponse(BaseModel):
@@ -73,8 +70,7 @@ class _LoginResponse(BaseModel):
     tokenExpireTime: int = Field(title='请求token过期时间戳')
     refreshTokenExpireTime: int = Field(title='刷新token过期时间戳')
 
-    class Config:
-        title = "登陆回传值"
+    model_config = ConfigDict(title="登陆回传值")
 
 
 @authorization_blueprint.post('login')
@@ -94,10 +90,10 @@ async def login(request: Request, body: _LoginRequest):
     refresh_token_expire_time = int((now + timedelta(weeks=1)).timestamp())
     secret = ConfigManager().get_config('ApiKey', 'jwt_secret')
     token = jwt.encode(TokenPayload(timestamp=token_expire_time, applyType=body.applyType,
-                                    username=body.username, password=body.password).dict(), secret)
+                                    username=body.username, password=body.password).model_dump(), secret)
     refresh_token = jwt.encode(TokenPayload(timestamp=refresh_token_expire_time,
                                             applyType=body.applyType,
-                                            username=body.username, password=body.password).dict(), secret)
+                                            username=body.username, password=body.password).model_dump(), secret)
 
     return _LoginResponse(token=token, refreshToken=refresh_token,
                           tokenExpireTime=token_expire_time,
@@ -107,16 +103,14 @@ async def login(request: Request, body: _LoginRequest):
 class _RefreshTokenRequest(BaseModel):
     refreshToken: str = Field(title='刷新token')
 
-    class Config:
-        title = "刷新token请求值"
+    model_config = ConfigDict(title="刷新token请求值")
 
 
 class _RefreshTokenResponse(BaseModel):
     token: str = Field(title='请求token')
     tokenExpireTime: int = Field(title='请求token过期时间戳')
 
-    class Config:
-        title = "刷新token回传值"
+    model_config = ConfigDict(title="刷新token回传值")
 
 
 def _decode_token(token: str) -> dict:
@@ -150,7 +144,7 @@ async def refresh_token(request: Request, body: _RefreshTokenRequest):
 
     token_expire_time = int((datetime.now() + timedelta(minutes=15)).timestamp())
     token = jwt.encode(TokenPayload(timestamp=token_expire_time, applyType=payload.applyType,
-                                    username=payload.username, password=payload.password).dict(),
+                                    username=payload.username, password=payload.password).model_dump(),
                        ConfigManager().get_config('ApiKey', 'jwt_secret'))
     return _RefreshTokenResponse(token=token, tokenExpireTime=token_expire_time)
 
@@ -159,8 +153,7 @@ class AuthorizedUser(BaseModel):
     username: str
     password: str
 
-    class Config:
-        title = "经验证的用户"
+    model_config = ConfigDict(title="经验证的用户")
 
 
 def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optional[list[LoginApplyType]] = None,
