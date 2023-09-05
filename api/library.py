@@ -46,7 +46,7 @@ async def fetch_borrow_book(request: Request, query: FetchBorrowBookRequest, use
                 is_curr=query.is_curr
             )
         )
-    return FetchBorrowBookResponse.parse_obj(message_to_dict(res))
+    return FetchBorrowBookResponse.model_validate(message_to_dict(res))
 
 
 class RenewBookRequest(BaseModel):

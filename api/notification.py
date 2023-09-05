@@ -1,20 +1,18 @@
 import json
 from typing import List, Optional, Dict
 
-from pydantic import BaseModel, Field, Json
-
-from sanic import Request, Blueprint
-
-from _321CQU.tools import gRPCManager
 from _321CQU.service import ServiceEnum
+from _321CQU.tools import gRPCManager
+from micro_services_protobuf.common_pb2 import DefaultResponse, UserId
 from micro_services_protobuf.notification_center import service_pb2_grpc as notification_grpc
 from micro_services_protobuf.notification_center import wechat_pb2, apns_pb2, event_pb2
-from micro_services_protobuf.common_pb2 import DefaultResponse, UserId
 from micro_services_protobuf.protobuf_enum.notification_center import NotificationEvent
+from pydantic import BaseModel, Field
+from sanic import Request, Blueprint
+from sanic_ext.extensions.openapi import openapi
 
 from api.authorization import authorized, LoginApplyType, AuthorizedUser
 from api.utils.ApiInterface import api_request, api_response, handle_grpc_error
-
 from utils.Exceptions import _321CQUException
 
 __all__ = ['notification_blueprint']
@@ -29,7 +27,7 @@ class _UpdateSubscribeRequest(BaseModel):
     uid: str = Field(title='用户身份标识符')
     event: NotificationEvent = Field(title="欲操作事件类型", description=NotificationEvent.get_all_events_description())
     is_subscribe: bool = Field(title="是否为订阅操作，true为订阅，false为取消订阅")
-    extra_data: Optional[Dict] = Field(title='订阅事件可能需要的额外信息，任意字典')
+    extra_data: Optional[Dict] = Field(default=None, title='订阅事件可能需要的额外信息，任意字典')
 
 
 @notification_blueprint.post(uri='updateSubscribe')

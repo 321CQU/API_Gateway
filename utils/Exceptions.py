@@ -1,11 +1,9 @@
 from typing import Optional, Union, Dict, Any
 
-from pydantic import ValidationError
-
 from sanic.exceptions import SanicException
 from sanic.handlers import ErrorHandler
-from sanic.response import json
 from sanic.log import error_logger
+from sanic.response import json
 
 
 class _321CQUException(SanicException):
@@ -21,7 +19,7 @@ class _321CQUException(SanicException):
             context: Optional[Dict[str, Any]] = None,
             extra: Optional[Dict[str, Any]] = None,
     ) -> None:
-        super().__init__(message, status_code, quite, context, extra)
+        super().__init__(message, status_code, quiet=quite, context=context, extra=extra)
         self.error_info = error_info if error_info is not None else ""
 
 

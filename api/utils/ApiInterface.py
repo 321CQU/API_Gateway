@@ -7,14 +7,13 @@ from sanic.response import HTTPResponse
 from sanic_ext.exceptions import InitError
 from sanic_ext.extensions.openapi.builders import OperationStore
 from sanic_ext.utils.extraction import extract_request
-from sanic_ext.extensions.openapi import openapi
 
-from pydantic import BaseModel, ValidationError, Field
-from pydantic.generics import GenericModel
+from pydantic import BaseModel, ValidationError, Field, SerializeAsAny
 
 from grpc.aio import AioRpcError
 from grpc import StatusCode
 
+from api.utils.tools import component
 from utils.Exceptions import _321CQUException
 
 __all__ = ['api_request', 'api_response', 'handle_grpc_error']
@@ -22,13 +21,13 @@ __all__ = ['api_request', 'api_response', 'handle_grpc_error']
 T = TypeVar("T", bound=BaseModel)
 
 
-class BaseApiResponse(GenericModel, Generic[T]):
+class BaseApiResponse(BaseModel, Generic[T]):
     """
     API响应模版，回传的ApiResponse子类会填入data中
     """
     status: int = Field(title='响应状态', description='成功时为1，失败时为0')
     msg: str = Field(title='响应信息', description='成功时为`success`，失败时为相关错误提示')
-    data: T | None = Field(title="数据")
+    data: SerializeAsAny[T | None] = Field(title="数据")
 
 
 def api_request(
@@ -56,8 +55,15 @@ def api_request(
         raise InitError("Cannot define both a form and json route validator")
 
     def decorator(f):
-        body_content = {"application/json": openapi.Component(json, name=json.Config.title)} if json is not None else \
-            ({"application/x-www-form-urlencoded": openapi.Component(form, name=form.Config.title)} if form else None)
+        title = json.model_config.get("title") if json is not None else \
+            (form.model_config.get("title") if form is not None else None)
+        body_content = {
+            "application/json": component(json)
+        } if json is not None else (
+            {
+                "application/x-www-form-urlencoded": component(form)
+            } if form is not None else None
+        )
         params = {**kwargs}
 
         @wraps(f)
@@ -65,14 +71,14 @@ def api_request(
             request = extract_request(*args)
             try:
                 if json:
-                    kwargs[body_argument] = json.parse_obj(request.json)
+                    kwargs[body_argument] = json.model_validate(request.json)
                 elif form:
-                    kwargs[body_argument] = form.parse_obj(request.form)
+                    kwargs[body_argument] = form.model_validate(request.form)
                 if query:
                     parsed_args = {}
                     for key, value in request.args.items():
                         parsed_args[key] = value[0] if len(value) == 1 else value
-                    kwargs[query_argument] = query.parse_obj(parsed_args)
+                    kwargs[query_argument] = query.model_validate(parsed_args)
             except ValidationError as e:
                 raise _321CQUException(error_info=f"请求参数错误", quite=True)
             retval = f(*args, **kwargs)
@@ -85,7 +91,7 @@ def api_request(
         if body_content is not None:
             OperationStore()[decorated_function].body(body_content, **params)
         if query is not None:
-            schema = query.schema()
+            schema = query.model_json_schema(ref_template="#/components/schemas/{model}")
             for name, value in inspect.get_annotations(query).items():
                 ex_param = {}
                 if schema.get('properties') is not None and schema['properties'].get(name) is not None:
@@ -121,8 +127,9 @@ def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = 
 
             kwargs["status"] = status
             if auto_wrap:
-                return HTTPResponse(BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).json(),
-                                    content_type="application/json")
+                return HTTPResponse(
+                    BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).model_dump_json(),
+                    content_type="application/json")
             else:
                 return ret
 
@@ -134,14 +141,14 @@ def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = 
             if inspect.isclass(retval) and issubclass(retval, BaseModel):
                 OperationStore()[decorated_function].response(
                     status, {
-                        'application/json': openapi.Component(BaseApiResponse[retval], name=retval.Config.title)
+                        'application/json': component(BaseApiResponse[retval])
                     },
                     description, **kwargs
                 )
             else:
                 base_retval = {'status': 1, 'msg': 'success', 'data': retval if retval is not None else {}}
                 OperationStore()[decorated_function].response(
-                    status, {'application/json': openapi.Component(BaseApiResponse[type(None)])}, description, **kwargs)
+                    status, {'application/json': component(BaseApiResponse[type(None)])}, description, **kwargs)
         else:
             OperationStore()[decorated_function].response(status, retval, description, **kwargs)
         return decorated_function

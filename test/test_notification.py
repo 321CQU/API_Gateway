@@ -1,8 +1,7 @@
 import pytest
-
 from sanic_testing.testing import SanicASGITestClient
 
-from test import app, test_client
+from test import test_client
 from utils.Settings import ConfigManager
 
 _login_params = {
