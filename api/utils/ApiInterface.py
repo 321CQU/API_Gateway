@@ -27,7 +27,7 @@ class BaseApiResponse(BaseModel, Generic[T]):
     """
     status: int = Field(title='响应状态', description='成功时为1，失败时为0')
     msg: str = Field(title='响应信息', description='成功时为`success`，失败时为相关错误提示')
-    data: SerializeAsAny[T | None] = Field(title="数据")
+    data: SerializeAsAny[T | dict] = Field(title="数据")
 
 
 def api_request(
@@ -85,6 +85,7 @@ def api_request(
             if inspect.isawaitable(retval):
                 retval = await retval
             return retval
+
         # 使用sanic-ext中的OperationStore实现文档自动生成，参考其中的openapi.body装饰器
         if f in OperationStore():
             OperationStore()[decorated_function] = OperationStore().pop(f)
@@ -108,7 +109,8 @@ def api_request(
     return decorator
 
 
-def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = None, status: int = 200, description: str = '',
+def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = None, status: int = 200,
+                 description: str = '',
                  *, auto_wrap: bool = True, **kwargs):
     """
     实现参数返回值自动包装与API页面生成的装饰器
@@ -118,6 +120,7 @@ def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = 
     :param auto_wrap: 强制关键字参数，为False时直接返回被装饰函数运行结果
     :param kwargs: 其他需要显示在/docs中的参数（需满足OpenAPI规范）
     """
+
     def decorator(f):
         @wraps(f)
         async def decorated_function(*args, **kwargs):
@@ -128,7 +131,8 @@ def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = 
             kwargs["status"] = status
             if auto_wrap:
                 return HTTPResponse(
-                    BaseApiResponse(status=1, msg='success', data=ret if ret is not None else {}).model_dump_json(),
+                    BaseApiResponse[Dict](status=1, msg='success', data=(ret if ret is not None else {}))
+                    .model_dump_json(),
                     content_type="application/json")
             else:
                 return ret
@@ -146,9 +150,9 @@ def api_response(retval: Optional[Union[Type[BaseModel], Dict, HTTPResponse]] = 
                     description, **kwargs
                 )
             else:
-                base_retval = {'status': 1, 'msg': 'success', 'data': retval if retval is not None else {}}
+                base_retval = {'status': 1, 'msg': 'success', 'data': retval}
                 OperationStore()[decorated_function].response(
-                    status, {'application/json': component(BaseApiResponse[type(None)])}, description, **kwargs)
+                    status, {'application/json': component(BaseApiResponse[Dict])}, description, **kwargs)
         else:
             OperationStore()[decorated_function].response(status, retval, description, **kwargs)
         return decorated_function
@@ -160,6 +164,7 @@ def handle_grpc_error(func):
     """
     处理AioRpcError，返回的HttpResponse中包含503与grpc报错详细信息
     """
+
     @wraps(func)
     async def wrapped_function(*args, **kwargs):
         try:
@@ -175,4 +180,5 @@ def handle_grpc_error(func):
                 raise _321CQUException(error_info=e.details() if e.details() is not None else "服务调用异常",
                                        extra=e.details(), status_code=503, quite=True)
             raise _321CQUException(error_info="服务调用异常", extra=e.details(), status_code=503, quite=False)
+
     return wrapped_function

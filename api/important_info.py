@@ -52,7 +52,7 @@ class _HomepageInfo(BaseModel):
     img_url: str = Field(title="图片URL，无路径前缀，如：/static/img/xxx.png")
     img_pos: ImgPos = Field(title="图片存储位置")
     jump_type: JumpType = Field(title="点击后跳转类型")
-    jump_param: Optional[str] = Field(title="跳转参数，根据jump_type不同而不同")
+    jump_param: Optional[str] = Field(default=None, title="跳转参数，根据jump_type不同而不同")
 
 
 class _HomepageResponse(BaseModel):
