@@ -39,6 +39,7 @@ class _HomepageInfo(BaseModel):
         NONE = "NONE"  # 无跳转
         MD = "MD"  # Markdown
         URL = "URL"  # URL
+        WECHAT_MINI_PROGRAM = "WECHAT_MINI_PROGRAM"  # 微信小程序
 
         @staticmethod
         def from_protobuf_enum(jump_type: cc_models.HomepageResponse.HomepageInfo.JumpType):
@@ -48,6 +49,8 @@ class _HomepageInfo(BaseModel):
                 return _HomepageInfo.JumpType.MD
             elif jump_type == cc_models.HomepageResponse.HomepageInfo.JumpType.URL:
                 return _HomepageInfo.JumpType.URL
+            elif jump_type == cc_models.HomepageResponse.HomepageInfo.JumpType.WECHAT_MINI_PROGRAM:
+                return _HomepageInfo.JumpType.WECHAT_MINI_PROGRAM
 
     img_url: str = Field(title="图片URL，无路径前缀，如：/static/img/xxx.png")
     img_pos: ImgPos = Field(title="图片存储位置")
@@ -57,7 +60,6 @@ class _HomepageInfo(BaseModel):
 
 class _HomepageResponse(BaseModel):
     homepages: List[_HomepageInfo] = Field(title="首页信息列表")
-    last_update_time: int = Field(title="最后更新时间戳，秒级单位")
 
 
 @important_info_blueprint.get(uri='homepages')
@@ -77,5 +79,4 @@ async def get_homepage(request: Request, grpc_manager: gRPCManager):
                 img_url=homepage.img_url, img_pos=_HomepageInfo.ImgPos.from_protobuf_enum(homepage.img_pos),
                 jump_type=_HomepageInfo.JumpType.from_protobuf_enum(homepage.jump_type), jump_param=homepage.jump_param
             ) for homepage in res.homepages],
-            last_update_time=res.last_update_time
         )
