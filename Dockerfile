@@ -1,11 +1,12 @@
 FROM python:3.11
 
 ENV TZ=Asia/Shanghai
-
-COPY requirements.txt /src/
+ENV PATH="/src/.venv/bin:$PATH"
 
 WORKDIR /src
-RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+COPY pyproject.toml uv.lock /src/
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple uv \
+    && uv sync --frozen --no-dev --no-install-project
 
 COPY . .
 
