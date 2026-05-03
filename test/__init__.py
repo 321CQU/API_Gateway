@@ -7,6 +7,7 @@ from _321CQU.tools.gRPCManager import gRPCManager, MockGRPCManager
 
 from api import api_urls
 from utils.Exceptions import _321CQUErrorHandler
+from utils.Metrics import register_metrics
 from utils.SqlManager import SqlManager, SqliteManager
 from utils.log_config import LogConfig
 
@@ -20,6 +21,7 @@ def app() -> Sanic:
     my_app.ext.add_dependency(gRPCManager, MockGRPCManager)
 
     my_app.blueprint(api_urls)
+    register_metrics(my_app)
     return my_app
 
 
