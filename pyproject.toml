@@ -9,6 +9,7 @@ dependencies = [
     "grpcio==1.57.0",
     "grpcio-tools>=1.57.0",
     "httpx>=0.28.1",
+    "prometheus-client>=0.20.0",
     "pycryptodome>=3.21.0",
     "pydantic>=2.10.5",
     "pytest>=8.3.4",
