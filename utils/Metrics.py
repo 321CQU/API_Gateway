@@ -1,11 +1,12 @@
 import hmac
-import os
 import time
 from ipaddress import ip_address
 
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from sanic import Request, Sanic
 from sanic.response import HTTPResponse, raw, text
+
+from utils.Settings import ConfigManager
 
 HTTP_REQUEST_DURATION = Histogram(
     "api_gateway_http_request_duration_seconds",
@@ -34,8 +35,8 @@ def _get_route_label(request: Request) -> str:
     return "__unmatched__"
 
 
-def _get_metrics_token(app: Sanic) -> str | None:
-    return app.config.get("METRICS_TOKEN") or os.getenv("API_GATEWAY_METRICS_TOKEN")
+def _get_metrics_token() -> str | None:
+    return ConfigManager().get_config("Metrics", "token") or None
 
 
 def _is_loopback_request(request: Request) -> bool:
@@ -50,7 +51,7 @@ def _is_loopback_request(request: Request) -> bool:
 
 
 def _is_metrics_request_allowed(request: Request) -> bool:
-    token = _get_metrics_token(request.app)
+    token = _get_metrics_token()
     if token is None:
         return _is_loopback_request(request)
 
