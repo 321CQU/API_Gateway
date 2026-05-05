@@ -18,7 +18,7 @@ def app() -> Sanic:
     my_app.error_handler = _321CQUErrorHandler()
 
     my_app.ext.add_dependency(SqlManager, SqliteManager)
-    my_app.ext.add_dependency(gRPCManager, MockGRPCManager)
+    my_app.ext.add_dependency(gRPCManager, lambda: MockGRPCManager())
 
     my_app.blueprint(api_urls)
     register_metrics(my_app)
