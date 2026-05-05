@@ -1,5 +1,6 @@
 import hmac
 import time
+from configparser import Error as ConfigError
 from ipaddress import ip_address
 
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
@@ -35,8 +36,16 @@ def _get_route_label(request: Request) -> str:
     return "__unmatched__"
 
 
-def _get_metrics_token() -> str | None:
-    return ConfigManager().get_config("Metrics", "token") or None
+def _get_metrics_token(app: Sanic | None = None) -> str | None:
+    if app is not None:
+        token = app.config.get("METRICS_TOKEN")
+        if token:
+            return token
+
+    try:
+        return ConfigManager().get_config("Metrics", "token") or None
+    except ConfigError:
+        return None
 
 
 def _is_loopback_request(request: Request) -> bool:
@@ -51,7 +60,7 @@ def _is_loopback_request(request: Request) -> bool:
 
 
 def _is_metrics_request_allowed(request: Request) -> bool:
-    token = _get_metrics_token()
+    token = _get_metrics_token(request.app)
     if token is None:
         return _is_loopback_request(request)
 

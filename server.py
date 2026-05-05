@@ -16,7 +16,7 @@ app.config.CORS_SUPPORTS_CREDENTIALS = True
 app.error_handler = _321CQUErrorHandler()
 
 app.ext.add_dependency(SqlManager, SqliteManager)
-app.ext.add_dependency(gRPCManager, lambda: gRPCManager())
+app.ext.add_dependency(gRPCManager, lambda: gRPCManager(caller="api_gateway"))
 
 app.blueprint(api_urls)
 register_metrics(app)
