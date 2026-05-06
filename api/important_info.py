@@ -57,7 +57,6 @@ class _HomepageInfo(BaseModel):
 
 class _HomepageResponse(BaseModel):
     homepages: List[_HomepageInfo] = Field(title="首页信息列表")
-    last_update_time: int = Field(title="最后更新时间戳，秒级单位")
 
 
 @important_info_blueprint.get(uri='homepages')
@@ -77,5 +76,4 @@ async def get_homepage(request: Request, grpc_manager: gRPCManager):
                 img_url=homepage.img_url, img_pos=_HomepageInfo.ImgPos.from_protobuf_enum(homepage.img_pos),
                 jump_type=_HomepageInfo.JumpType.from_protobuf_enum(homepage.jump_type), jump_param=homepage.jump_param
             ) for homepage in res.homepages],
-            last_update_time=res.last_update_time
         )
