@@ -145,6 +145,111 @@ def _session_name(session: dict) -> str:
     return f"{year}{'秋' if is_autumn else '春'}"
 
 
+def _optional_message(message, field_name: str):
+    try:
+        if message.HasField(field_name):
+            return getattr(message, field_name)
+    except (AttributeError, ValueError):
+        value = getattr(message, field_name, None)
+        return value if value else None
+    return None
+
+
+def _period_to_dict(period) -> dict:
+    return message_to_dict(period) if period else {}
+
+
+def _enroll_course_info_to_old(item) -> dict:
+    course = _optional_message(item, 'course') or getattr(item, 'course', None)
+    return {
+        'Id': item.id,
+        'Course': {
+            'CourseCode': getattr(course, 'code', '') if course else '',
+            'CourseName': getattr(course, 'name', '') if course else '',
+            'Credit': getattr(course, 'credit', 0.0) if course else 0.0,
+        },
+        'Category': item.category,
+        'EnrollSign': item.enroll_sign,
+        'CourseNature': item.course_nature,
+        'Campus': list(item.campus),
+    }
+
+
+def _enroll_timetable_to_old(timetable: dict) -> dict:
+    time = timetable.get('time', {})
+    return {
+        'Weeks': timetable.get('weeks', []),
+        'Time': {
+            'WeekDay': time.get('weekday', 0),
+            'Period': time.get('period', 0),
+        },
+        'Pos': timetable.get('pos', ''),
+    }
+
+
+def _enroll_course_item_to_old(item: dict) -> dict:
+    course = item.get('course', {})
+    return {
+        'Id': item.get('id', ''),
+        'HasSelected': item.get('checked', False),
+        'Course': {
+            'CourseCode': course.get('code', ''),
+            'CourseName': course.get('name', ''),
+            'Credit': course.get('credit', 0.0),
+            'CourseNum': course.get('course_num', ''),
+            'InstructorName': course.get('instructor', ''),
+        },
+        'Type': item.get('type', ''),
+        'SelectedNum': item.get('selected_num', 0),
+        'Capacity': item.get('capacity', 0),
+        'Children': [
+            _enroll_course_item_to_old(child)
+            for child in item.get('children', [])
+        ],
+        'Campus': item.get('campus', ''),
+        'Timetable': [
+            _enroll_timetable_to_old(t)
+            for t in item.get('timetables', [])
+        ],
+    }
+
+
+def _course_timetable_to_old(timetable, legacy_version: str) -> dict:
+    course = _optional_message(timetable, 'course') or getattr(timetable, 'course', None)
+    day_time = _optional_message(timetable, 'day_time')
+    period = _optional_message(day_time, 'period') if day_time else None
+    weekday = day_time.weekday if day_time else 0
+    room_name = (
+        getattr(timetable, 'classroom_name', '')
+        or getattr(timetable, 'classroom', '')
+    )
+
+    if legacy_version == '1.0':
+        return {
+            'WeekDayFormat': str(weekday) if day_time else '',
+            'CourseName': getattr(course, 'name', '') if course else '',
+            'CourseCode': getattr(course, 'code', '') if course else '',
+            'ClassNbr': getattr(course, 'course_num', '') if course else '',
+            'RoomName': room_name,
+            'InstructorName': getattr(course, 'instructor', '') if course else '',
+            'TeachingWeekFormat': str(timetable.weeks),
+            'PeriodFormat': str(period) if period else '',
+            'Credit': getattr(course, 'credit', 0.0) if course else 0.0,
+        }
+
+    return {
+        'WeekDay': weekday,
+        'CourseName': getattr(course, 'name', '') if course else '',
+        'CourseCode': getattr(course, 'code', '') if course else '',
+        'CourseNum': getattr(course, 'course_num', '') if course else '',
+        'RoomName': room_name,
+        'InstructorName': getattr(course, 'instructor', '') if course else '',
+        'Weeks': [_period_to_dict(week) for week in timetable.weeks],
+        'Period': _period_to_dict(period) if period else 0,
+        'Credit': getattr(course, 'credit', 0.0) if course else 0.0,
+    }
+
+
 # ============================================================
 # 组 D — 禁用端点（在其他路由之前定义，避免被通配匹配）
 # ============================================================
@@ -348,21 +453,10 @@ async def legacy_get_enroll_list(request: Request, user: AuthorizedUser, legacy_
                     auth=user.username, password=user.password),
                 is_major=is_major,
             )
-        )
+    )
     result = {}
     for k, v in res.result.items():
-        result[k] = [{
-            'Id': item.id,
-            'Course': {
-                'CourseCode': item.course.code,
-                'CourseName': item.course.name,
-                'Credit': item.course.credit,
-            },
-            'Category': item.category,
-            'EnrollSign': item.enroll_sign,
-            'CourseNature': item.course_nature,
-            'Campus': item.campus,
-        } for item in v.info]
+        result[k] = [_enroll_course_info_to_old(item) for item in v.info]
     return {'EnrollCourses': result}
 
 
@@ -387,30 +481,7 @@ async def legacy_get_enroll_detail(request: Request, user: AuthorizedUser, legac
             )
         )
     items_data = message_to_dict(res).get('enroll_course_items', [])
-    items = [{
-        'Id': item.get('id', ''),
-        'HasSelected': item.get('has_selected', False),
-        'Course': {
-            'CourseCode': item.get('course', {}).get('code', ''),
-            'CourseName': item.get('course', {}).get('name', ''),
-            'Credit': item.get('course', {}).get('credit', 0.0),
-            'CourseNum': item.get('course', {}).get('course_num', ''),
-            'InstructorName': item.get('course', {}).get('instructor', ''),
-        },
-        'Type': item.get('type_', ''),
-        'SelectedNum': item.get('selected_num', 0),
-        'Capacity': item.get('capacity', 0),
-        'Children': item.get('children', []),
-        'Campus': item.get('campus', ''),
-        'Timetable': [{
-            'Weeks': t.get('weeks', []),
-            'Time': {
-                'WeekDay': t.get('day_time', {}).get('weekday', 0),
-                'Period': t.get('day_time', {}).get('period', 0),
-            },
-            'Pos': t.get('classroom', ''),
-        } for t in item.get('timetable', [])],
-    } for item in items_data]
+    items = [_enroll_course_item_to_old(item) for item in items_data]
     return {'CourseDetail': items}
 
 
@@ -441,7 +512,7 @@ async def legacy_get_borrow_list(request: Request, user: AuthorizedUser, legacy_
         'ShouldReturnTime': b.get('should_return_time', ''),
         'ReturnTime': b.get('return_time', ''),
         'LibraryName': b.get('library_name', ''),
-        'RenewFlag': b.get('renew_flag', False),
+        'RenewFlag': b.get('can_renew', False),
         'RenewCount': b.get('renew_count', 0),
         'IsReturn': b.get('is_return', False),
     } for b in books]}
@@ -510,13 +581,13 @@ async def legacy_get_fees(request: Request, user: AuthorizedUser, legacy_body: d
     fees_data = message_to_dict(res)
     if is_huxi:
         return {'FeesInfo': {
-            'Amount': fees_data.get('amount', 0.0),
-            'Eamount': fees_data.get('eamount', ''),
-            'Wamount': fees_data.get('wamount', ''),
+            'Amount': fees_data.get('balance', 0.0),
+            'Eamount': fees_data.get('electricity_subsidy', ''),
+            'Wamount': fees_data.get('water_subsidy', ''),
         }}
     else:
         return {'FeesInfo': {
-            'Amount': fees_data.get('amount', 0.0),
+            'Amount': fees_data.get('balance', 0.0),
             'Subsidies': fees_data.get('subsidies', ''),
         }}
 
@@ -667,32 +738,10 @@ async def legacy_get_course(request: Request, user: AuthorizedUser, legacy_body:
                 offset=offset,
             )
         )
-    timetables = []
-    for t in res.course_timetables:
-        if legacy_version == '1.0':
-            timetables.append({
-                'WeekDayFormat': str(t.weekday),
-                'CourseName': t.course_name,
-                'CourseCode': t.course_code,
-                'ClassNbr': t.course_num,
-                'RoomName': t.room_name,
-                'InstructorName': t.instructor_name,
-                'TeachingWeekFormat': str(t.weeks),
-                'PeriodFormat': str(t.day_time.period) if t.day_time else '',
-                'Credit': t.credit,
-            })
-        else:
-            timetables.append({
-                'WeekDay': t.weekday,
-                'CourseName': t.course_name,
-                'CourseCode': t.course_code,
-                'CourseNum': t.course_num,
-                'RoomName': t.room_name,
-                'InstructorName': t.instructor_name,
-                'Weeks': list(t.weeks),
-                'Period': t.day_time.period if t.day_time else 0,
-                'Credit': t.credit,
-            })
+    timetables = [
+        _course_timetable_to_old(t, legacy_version)
+        for t in res.course_timetables
+    ]
     return {'Courses': timetables}
 
 
