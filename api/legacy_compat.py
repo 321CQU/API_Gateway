@@ -166,7 +166,7 @@ def _period_to_range(period) -> str:
     end = getattr(period, 'end', None)
     if start is None or end is None:
         return ''
-    return str(start) if start == end else f"{start}-{end}"
+    return f"{start}-{end}"
 
 
 def _periods_to_range(periods) -> str:
@@ -175,6 +175,19 @@ def _periods_to_range(periods) -> str:
         for period_range in (_period_to_range(period) for period in periods)
         if period_range
     )
+
+
+def _weekday_to_legacy(weekday: int) -> str:
+    weekdays = ('一', '二', '三', '四', '五', '六', '日')
+    return weekdays[weekday] if 0 <= weekday < len(weekdays) else ''
+
+
+def _legacy_room_name(timetable) -> str:
+    classroom_name = getattr(timetable, 'classroom_name', '')
+    classroom = getattr(timetable, 'classroom', '')
+    if classroom_name and classroom:
+        return f"{classroom_name}-{classroom}"
+    return classroom_name or classroom
 
 
 def _enroll_course_info_to_old(item) -> dict:
@@ -237,14 +250,11 @@ def _course_timetable_to_old(timetable, legacy_version: str) -> dict:
     day_time = _optional_message(timetable, 'day_time')
     period = _optional_message(day_time, 'period') if day_time else None
     weekday = day_time.weekday if day_time else 0
-    room_name = (
-        getattr(timetable, 'classroom_name', '')
-        or getattr(timetable, 'classroom', '')
-    )
+    room_name = _legacy_room_name(timetable)
 
     if legacy_version == '1.0':
         return {
-            'WeekDayFormat': str(weekday) if day_time else '',
+            'WeekDayFormat': _weekday_to_legacy(weekday) if day_time else '',
             'CourseName': getattr(course, 'name', '') if course else '',
             'CourseCode': getattr(course, 'code', '') if course else '',
             'ClassNbr': getattr(course, 'course_num', '') if course else '',
