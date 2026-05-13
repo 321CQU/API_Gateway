@@ -128,13 +128,53 @@ class TestLegacyResponseFormat:
         """课表 weekday 位于 day_time 内，不在顶层"""
         data = _course_timetable_to_old(course_timetable, '1.0')
 
-        assert data['WeekDayFormat'] == '2'
+        assert data['WeekDayFormat'] == '三'
         assert data['CourseName'] == '高等数学'
         assert data['CourseCode'] == 'MATH101'
         assert data['ClassNbr'] == '001'
-        assert data['RoomName'] == 'D123 教室'
+        assert data['RoomName'] == 'D123 教室-D123'
         assert data['InstructorName'] == '张三'
+        assert data['TeachingWeekFormat'] == '1-16'
+        assert data['PeriodFormat'] == '3-4'
         assert data['Credit'] == 4.0
+
+    def test_course_timetable_formats_multiple_weeks_for_v1(self, course_timetable):
+        """v1 周次和节次不能泄露 protobuf 调试字符串"""
+        course_timetable.weeks.append(mycqu_model_pb2.Period(start=18, end=18))
+
+        data = _course_timetable_to_old(course_timetable, '1.0')
+
+        assert data['TeachingWeekFormat'] == '1-16,18-18'
+        assert data['PeriodFormat'] == '3-4'
+        assert 'start:' not in data['TeachingWeekFormat']
+        assert 'end:' not in data['TeachingWeekFormat']
+        assert 'start:' not in data['PeriodFormat']
+        assert 'end:' not in data['PeriodFormat']
+
+    def test_course_timetable_formats_weekday_and_room_for_v1(self):
+        """v1 星期和教室名称应匹配旧 API 展示格式"""
+        timetable = mycqu_model_pb2.CourseTimetable(
+            course=mycqu_model_pb2.Course(
+                name='建筑设计（12）',
+                code='ARCH41140',
+                course_num='198250-007-001E-M',
+                credit=4.0,
+                instructor='张红平-10842[主讲];',
+            ),
+            classroom='B5012',
+            classroom_name='建筑模型实验室（B5012）',
+            weeks=[mycqu_model_pb2.Period(start=11, end=11)],
+            day_time=mycqu_model_pb2.CourseDayTime(
+                weekday=1,
+                period=mycqu_model_pb2.Period(start=10, end=11),
+            ),
+        )
+
+        data = _course_timetable_to_old(timetable, '1.0')
+
+        assert data['WeekDayFormat'] == '二'
+        assert data['TeachingWeekFormat'] == '11-11'
+        assert data['RoomName'] == '建筑模型实验室（B5012）-B5012'
 
     def test_course_timetable_uses_day_time_weekday_for_v2(self, course_timetable):
         """v2 格式也应从 day_time 读取星期，并返回可 JSON 序列化的节次"""
