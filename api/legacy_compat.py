@@ -159,6 +159,24 @@ def _period_to_dict(period) -> dict:
     return message_to_dict(period) if period else {}
 
 
+def _period_to_range(period) -> str:
+    if not period:
+        return ''
+    start = getattr(period, 'start', None)
+    end = getattr(period, 'end', None)
+    if start is None or end is None:
+        return ''
+    return str(start) if start == end else f"{start}-{end}"
+
+
+def _periods_to_range(periods) -> str:
+    return ','.join(
+        period_range
+        for period_range in (_period_to_range(period) for period in periods)
+        if period_range
+    )
+
+
 def _enroll_course_info_to_old(item) -> dict:
     course = _optional_message(item, 'course') or getattr(item, 'course', None)
     return {
@@ -232,8 +250,8 @@ def _course_timetable_to_old(timetable, legacy_version: str) -> dict:
             'ClassNbr': getattr(course, 'course_num', '') if course else '',
             'RoomName': room_name,
             'InstructorName': getattr(course, 'instructor', '') if course else '',
-            'TeachingWeekFormat': str(timetable.weeks),
-            'PeriodFormat': str(period) if period else '',
+            'TeachingWeekFormat': _periods_to_range(timetable.weeks),
+            'PeriodFormat': _period_to_range(period),
             'Credit': getattr(course, 'credit', 0.0) if course else 0.0,
         }
 
