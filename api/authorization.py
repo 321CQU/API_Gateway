@@ -2,7 +2,7 @@ import inspect
 from datetime import datetime, timedelta
 from enum import StrEnum
 from functools import wraps
-from typing import Optional, Type, Any
+from typing import Optional, Type, Any, Final
 
 from pydantic import BaseModel, ValidationError, Field, ConfigDict
 from sanic import Request, Blueprint
@@ -17,6 +17,10 @@ from utils.Settings import ConfigManager
 __all__ = ['authorization_blueprint', 'authorized', 'LoginApplyType', 'TokenPayload', 'AuthorizedUser']
 
 authorization_blueprint = Blueprint('Authorization', url_prefix='authorization')
+
+_TEMPORARY_LOGIN_USERNAME: Final = '__321CQU_TEMPORARY_LOGIN_USERNAME__'
+_TEMPORARY_LOGIN_PASSWORD: Final = '__321CQU_TEMPORARY_LOGIN_PASSWORD__'
+_TEMPORARY_LOGIN_ERROR_INFO: Final = '校园网信息服务暂不可用，正在积极修复中，请等待后续通知'
 
 
 class LoginApplyType(StrEnum):
@@ -73,6 +77,16 @@ class _LoginResponse(BaseModel):
     model_config = ConfigDict(title="登陆回传值")
 
 
+def _is_temporary_login_user(username: Optional[str], password: Optional[str]) -> bool:
+    return username == _TEMPORARY_LOGIN_USERNAME and password == _TEMPORARY_LOGIN_PASSWORD
+
+
+def _get_login_user_payload(body: _LoginRequest) -> tuple[Optional[str], Optional[str]]:
+    if body.username is None and body.password is None:
+        return None, None
+    return _TEMPORARY_LOGIN_USERNAME, _TEMPORARY_LOGIN_PASSWORD
+
+
 @authorization_blueprint.post('login')
 @api_request(json=_LoginRequest)
 @api_response(_LoginResponse)
@@ -89,11 +103,12 @@ async def login(request: Request, body: _LoginRequest):
     token_expire_time = int((now + timedelta(minutes=15)).timestamp())
     refresh_token_expire_time = int((now + timedelta(weeks=1)).timestamp())
     secret = ConfigManager().get_config('ApiKey', 'jwt_secret')
+    username, password = _get_login_user_payload(body)
     token = jwt.encode(TokenPayload(timestamp=token_expire_time, applyType=body.applyType,
-                                    username=body.username, password=body.password).model_dump(), secret)
+                                    username=username, password=password).model_dump(), secret)
     refresh_token = jwt.encode(TokenPayload(timestamp=refresh_token_expire_time,
                                             applyType=body.applyType,
-                                            username=body.username, password=body.password).model_dump(), secret)
+                                            username=username, password=password).model_dump(), secret)
 
     return _LoginResponse(token=token, refreshToken=refresh_token,
                           tokenExpireTime=token_expire_time,
@@ -182,6 +197,9 @@ def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optio
             if LoginApplyType(payload.applyType).need_explicit_allow and \
                     (include is None or payload.applyType not in include):
                 raise _321CQUException(error_info='No Access', status_code=403)
+
+            if _is_temporary_login_user(payload.username, payload.password):
+                raise _321CQUException(error_info=_TEMPORARY_LOGIN_ERROR_INFO)
 
             if need_user:
                 if payload.username is None or payload.password is None or \
