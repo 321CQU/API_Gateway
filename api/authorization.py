@@ -170,15 +170,20 @@ class AuthorizedUser(BaseModel):
 
     model_config = ConfigDict(title="经验证的用户")
 
+    @property
+    def is_temporary_login(self) -> bool:
+        return _is_temporary_login_user(self.username, self.password)
+
 
 def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optional[list[LoginApplyType]] = None,
-               need_user: bool = False, user_argument: str = 'user'):
+               need_user: bool = False, user_argument: str = 'user', allow_temporary_user: bool = False):
     """
     api权限校验装饰器
     :param include: 可以使用该api的权限请求方式
     :param exclude: 无法使用该api权限的请求方式
     :param need_user: 需要从token中获取用户
     :param user_argument: 注入到参数中的变量名称
+    :param allow_temporary_user: 是否允许临时登录用户继续进入handler
     """
     if include and exclude:
         raise InitError("Cannot set include and exclude at same time")
@@ -199,7 +204,7 @@ def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optio
                 raise _321CQUException(error_info='No Access', status_code=403)
 
             if need_user:
-                if _is_temporary_login_user(payload.username, payload.password):
+                if _is_temporary_login_user(payload.username, payload.password) and not allow_temporary_user:
                     raise _321CQUException(error_info=_TEMPORARY_LOGIN_ERROR_INFO)
                 if payload.username is None or payload.password is None or \
                         payload.username == '' or payload.password == '':

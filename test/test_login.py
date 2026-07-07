@@ -104,6 +104,23 @@ async def test_authorized_include(app: Sanic):
 
 
 @pytest.mark.asyncio
+async def test_validate_auth_allows_temporary_login_user(test_client: SanicASGITestClient):
+    success_login_response = await get_success_login_response(test_client)
+
+    request, response = await test_client.post(
+        "/v1/edu_admin_center/validateAuth",
+        headers={'Authorization': 'Bearer ' + success_login_response.token}
+    )
+
+    assert response.status == 200
+    assert response.json == {
+        'status': 1,
+        'msg': 'success',
+        'data': {'sid': '', 'auth': '', 'name': '', 'uid': ''},
+    }
+
+
+@pytest.mark.asyncio
 async def test_authorized_allows_temporary_login_user_without_need_user(app: Sanic):
     @app.post('test_temporary_login_user')
     @authorized()

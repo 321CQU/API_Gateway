@@ -34,12 +34,15 @@ class _ValidateAuthResponse(BaseModel):
 @edu_admin_center_blueprint.post(uri='validateAuth')
 @api_request()
 @api_response(_ValidateAuthResponse)
-@authorized(need_user=True)
+@authorized(need_user=True, allow_temporary_user=True)
 @handle_grpc_error
 async def validate_auth(request: Request, user: AuthorizedUser, grpc_manager: gRPCManager):
     """
     账号验证
     """
+    if user.is_temporary_login:
+        return _ValidateAuthResponse(sid='', auth='', name='', uid='')
+
     async with grpc_manager.get_stub(ServiceEnum.EduAdminCenter) as stub:
         stub: eac_grpc.EduAdminCenterStub = stub
         res: eac_models.ValidateAuthResponse = await stub.ValidateAuth(
