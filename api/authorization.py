@@ -198,10 +198,9 @@ def authorized(*, include: Optional[list[LoginApplyType]] = None, exclude: Optio
                     (include is None or payload.applyType not in include):
                 raise _321CQUException(error_info='No Access', status_code=403)
 
-            if _is_temporary_login_user(payload.username, payload.password):
-                raise _321CQUException(error_info=_TEMPORARY_LOGIN_ERROR_INFO)
-
             if need_user:
+                if _is_temporary_login_user(payload.username, payload.password):
+                    raise _321CQUException(error_info=_TEMPORARY_LOGIN_ERROR_INFO)
                 if payload.username is None or payload.password is None or \
                         payload.username == '' or payload.password == '':
                     raise _321CQUException(error_info='User Info Not Found', status_code=401)
