@@ -31,6 +31,14 @@ class _ValidateAuthResponse(BaseModel):
     model_config = ConfigDict(title="验证账号回传值")
 
 
+_TEMPORARY_VALIDATE_AUTH_RESPONSE = _ValidateAuthResponse(
+    sid='00000000',
+    auth='00000000',
+    name='临时用户',
+    uid='00000000000000000000000000000000',
+)
+
+
 @edu_admin_center_blueprint.post(uri='validateAuth')
 @api_request()
 @api_response(_ValidateAuthResponse)
@@ -41,7 +49,7 @@ async def validate_auth(request: Request, user: AuthorizedUser, grpc_manager: gR
     账号验证
     """
     if user.is_temporary_login:
-        return _ValidateAuthResponse(sid='', auth='', name='', uid='')
+        return _TEMPORARY_VALIDATE_AUTH_RESPONSE
 
     async with grpc_manager.get_stub(ServiceEnum.EduAdminCenter) as stub:
         stub: eac_grpc.EduAdminCenterStub = stub
