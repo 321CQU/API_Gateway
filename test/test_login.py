@@ -104,7 +104,7 @@ async def test_authorized_include(app: Sanic):
 
 
 @pytest.mark.asyncio
-async def test_authorized_rejects_temporary_login_user(app: Sanic):
+async def test_authorized_allows_temporary_login_user_without_need_user(app: Sanic):
     @app.post('test_temporary_login_user')
     @authorized()
     def test_temporary_login_user(request: Request):
@@ -120,8 +120,7 @@ async def test_authorized_rejects_temporary_login_user(app: Sanic):
         headers={'Authorization': 'Bearer ' + success_login_response.token}
     )
     assert response.status == 200
-    assert response.json['status'] == 0
-    assert response.json['msg'] == _TEMPORARY_LOGIN_ERROR_INFO
+    assert response.json == {'ok': True}
 
 
 @pytest.mark.asyncio
