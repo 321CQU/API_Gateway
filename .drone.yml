@@ -19,8 +19,6 @@ clone:
 steps:
 - name: clone
   commands:
-    - git config --global http.proxy http://127.0.0.1:7890
-    - git config --global https.proxy http://127.0.0.1:7890
     - git clone https://github.com/321CQU/API_Gateway.git
     - cd ./API_Gateway/
     - git checkout main
