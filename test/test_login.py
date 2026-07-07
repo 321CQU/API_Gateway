@@ -116,7 +116,12 @@ async def test_validate_auth_allows_temporary_login_user(test_client: SanicASGIT
     assert response.json == {
         'status': 1,
         'msg': 'success',
-        'data': {'sid': '', 'auth': '', 'name': '', 'uid': ''},
+        'data': {
+            'sid': '00000000',
+            'auth': '00000000',
+            'name': '临时用户',
+            'uid': '00000000000000000000000000000000',
+        },
     }
 
 
